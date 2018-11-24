@@ -1,0 +1,87 @@
+{% extends 'layout/dashboard/index.html' %} 
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="content-wrapper" >
+  <section class="content-header">
+    <h1>
+      Kelas
+      <small>Template</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Siswa</a>
+        </li>
+        <li class="active">Template</li>
+      </ol>
+    </section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              Edit Kelas
+            </div>
+            <div class="box-body">
+
+              <div class="col-md-12 col-sm-9">
+                <form  role="form" action="{% url 'siswa:update' %}" method="POST"> 
+                  <input type="hidden" name="id" value="{{id}}" class="form-control">
+                  {% csrf_token %}
+                  
+                  <div class="box-body">
+                    <div class="form-group" >
+                      <label for="exampleInputEmail1" class="control-label"> User</label>
+                      {{form.user | add_class:"form-control"| append_attr:"readonly"}}
+                    </div>
+                  </div>
+
+                  <div class="box-body">
+                    <div class="form-group" >
+                      <label for="exampleInputEmail1" class="control-label">Nama Siswa</label>
+                      {{form.nama | add_class:"form-control"}}
+                    </div>
+                  </div>
+
+                  <div class="box-body">
+                    <div class="form-group" >
+                      <label for="exampleInputEmail1" class="control-label">Jenis kelamin</label>
+                      <select class="form-control " name="jenis_kelamin"  >
+                        <option value="Laki - Laki">Laki - Laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="box-body">
+                    <div class="form-group" >
+                      <label for="exampleInputEmail1" class="control-label">Alamat</label>
+                      {{form.alamat | add_class:"form-control"}}
+                    </div>
+                  </div>
+
+                  
+
+                  <!-- /.box-body -->            
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-primary" >
+
+                      <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+{% endblock %}

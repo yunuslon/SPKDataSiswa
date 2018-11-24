@@ -1,0 +1,84 @@
+{% extends 'layout/dashboard/index.html' %} {% block content %}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+           Detail Soal Olimpiade
+            <small>{{detailsoal.mata_pelajaran}}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Detail Soal Olimpiade</a></li>
+            <li class="active">Template</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0">
+                <div class="box box-success">
+                    <div class="box-body">
+                            <div class="col-md-4 col-sm-4">
+                                    <p  style="text-align: center; font-size: 18px; padding-top: 8px;">Gambar Soal</p>
+                                    <img src="{{detailsoal.gambar.url}}" alt="" style="width: 100%; height: auto; border: 1px #d5d8dc solid">
+                                    <p style="text-align: center; font-size: 18px; padding-top: 8px;"></p>
+                                    <a href="{% url 'tesolimpiade:editfis' detailsoal.id %}" class="btn btn-success btn-block" style="margin-bottom: 8px">Ubah Gambar Soal <i class="fa fa-pencil"></i></a>
+                            </div>
+                        <div class="col-md-8 col-sm-8">
+                            <table class="table table-responsive table-striped table-hover">
+                                <tbody>
+                                        <tr>
+                                                <td style="width: 30%">No Soal</td>
+                                                <td>:</td>
+                                                <td>{{detailsoal.no}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Pertayaan</td>
+                                                <td>:</td>
+                                                <td>{{detailsoal.pertayaan}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Jawaban A</td>
+                                                <td>:</td>
+                                                <td>{{detailsoal.jawabanA}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Jawaban B</td>
+                                                <td>:</td>
+                                                <td>{{detailsoal.jawabanB}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Jawaban C</td>
+                                                <td>:</td>
+                                                <td>{{detailsoal.jawabanC}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Jawaban D</td>
+                                                <td>:</td>
+                                                <td>{{detailsoal.jawabanD}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Jawaban E</td>
+                                                <td>:</td>
+                                                <td>{{detailsoal.jawabanE}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Kunci Jawaban</td>
+                                                <td>:</td>
+                                                <td>{{detailsoal.kunci}}</td>
+                                            </tr>
+                                </tbody>
+                            </table>
+
+                            <a href="{% url 'tesolimpiade:addbio' %}" class="pull-right" style="margin-left: 16px;">Tambah Soal &raquo;</a> 
+                            <a href="{% url 'tesolimpiade:view' %}" class="pull-right">&laquo; Kembali</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</section>
+{% endblock %}

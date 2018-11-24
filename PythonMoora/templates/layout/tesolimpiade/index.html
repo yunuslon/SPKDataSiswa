@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {% include 'layout/tesolimpiade/head.html'%}
+</head>
+<!-- sidebar-mini skin-purple -->
+<body class="hold-transition skin-blue fixed layout-top-nav">
+	<!-- <body class="skin-purple fixed sidebar-mini sidebar-mini-expand-feature sidebar-open" 
+style="height: auto; min-height: 100%;"> -->
+    <div class="content-wrapper">
+    {% include 'layout/tesolimpiade/header.html'%}
+    <section class="row">
+            {% block content %} {% endblock %}
+    </section>
+    </div>
+</body>
+<div class="row">
+        {% include 'layout/tesolimpiade/footer.html'%}   
+</div>
+</html>

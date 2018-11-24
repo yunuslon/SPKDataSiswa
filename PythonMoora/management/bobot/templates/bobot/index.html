@@ -1,0 +1,139 @@
+{% extends 'layout/dashboard/index.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Bobot
+      <small>Template</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i>Bobot</a></li>
+      <li class="active">Template</li>
+
+    </ol>
+  </section>
+  <section class="content">
+
+    <div class="row">
+      <div class="col-sm-4">
+        {% if form_mode != 'add' %}
+        {% include 'bobot/form.html' %}
+        {% else %}
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Ubah Bobot</h3>
+          </div>
+          <!-- /.box-header -->
+          <!-- form start -->
+
+
+            <div class="box-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Nilai Akademik</label> {{form.nilai_akademik | add_class:"form-control" |append_attr:" disabled"}}
+              </div>
+            </div>
+
+            <div class="box-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Hasil Tes</label> {{form.hasil_tes | add_class:"form-control" |append_attr:" disabled"}}
+              </div>
+            </div>
+
+            <div class="box-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Karakter</label> {{form.karakter | add_class:"form-control" |append_attr:" disabled"}}
+              </div>
+            </div>
+
+            <div class="box-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Kelas</label> {{form.kelas | add_class:"form-control" |append_attr:" disabled"}}
+              </div>
+            </div>
+
+            <div class="box-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Pengalaman Lomba</label> {{form.plomba | add_class:"form-control" |append_attr:" disabled"}}
+              </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+
+            </div>
+          </form>
+
+
+        </div>
+
+
+        {% endif%}
+
+      </div>
+
+      <div class="col-sm-8">
+        <div class="box">
+          <div class="box-body">
+            <div class="box-header">
+              <h3 class="box-title">Bobot atribut tes olimpiade sains</h3>&nbsp;
+            </div>
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <!-- <th>No</th> -->
+
+                  <th>ID</th>
+                  <th>Nilai Akademik</th>
+                  <th>Hasil Tes</th>
+                  <th>Kelas</th>
+                  <th>Karakter</th>
+                  <th>Pengalaman Lomba</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for bb in bobot %}
+                <tr>
+                  <td>{{bb.id}}</td>
+                  <td>{{bb.nilai_akademik}} %</td>
+                  <td>{{bb.hasil_tes}} %</td>
+                  <td>{{bb.kelas}} %</td>
+                  <td>{{bb.karakter}} %</td>
+                  <td>{{bb.plomba}} %</td>
+                  <td>
+
+                    <a href="{% url 'bobot:edit' bb.id %}" class="btn btn-warning">
+                      <i class="fa fa-edit"></i>
+                    </a>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+</script>
+</div>
+</div>
+
+</section>  
+</div>
+{% if messages %} {% for message in messages %}
+<script>
+  toastr.success('{{message}}')
+</script>
+{% endfor %} {% endif %}
+
+<script type="text/javascript">
+  $('#example1').DataTable();
+</script>
+{% endblock %}

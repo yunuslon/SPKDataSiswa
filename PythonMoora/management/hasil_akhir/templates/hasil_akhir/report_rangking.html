@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Title</title>
+        <style type="text/css">
+            @page {
+                size: letter landscape;
+                margin: 2cm;
+            }
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;  
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+        </style>
+    </head>
+    <body>
+        <div class='wrapper'>
+            <div class='header'>
+                <p class='title'>Report Hasil Akhir </p>
+            </div>
+        <div>
+            <table class="details" border="1">
+                <thead>
+                        <th>No</th>
+                        <th align="center" width="300px">Nama</th>
+                        <th align="center">Benefit</th>
+                        <th align="center">Cost</th>
+                        <th align="center">Rangking</th>
+                </thead>
+                <tbody>
+                {% for c in nl %}
+                    <tr>
+                        <td align="center">{{forloop.counter}}</td>
+                        <td align="center">{{c.0}}</td>
+                        <td align="center">{{c.1}}</td>
+                        <td align="center">{{c.2}}</td>
+                        <td align="center">{{c.3}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    </body>
+</html>

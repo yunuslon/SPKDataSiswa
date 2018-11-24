@@ -1,0 +1,196 @@
+{% load widget_tweaks %}
+
+<div class="box">
+  <div class="box-body">
+    <div class="box-header">
+      <a type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default"> 
+       Tambah <i class="fa fa-plus"></i> 
+     </a>
+    </div>
+    <table id="example1" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>sikap</th>
+          <th>Olimpiade</th>
+          <th>Aksi</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for kl in karakter %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{kl.siswa.nama}}</td>
+          <td>{{kl.sikap}}</td>
+          <td>{{kl.mata_pelajaran}}</td>
+          <td>
+            <a href="{% url 'karakter:edit' kl.id %}" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{kl.id}}">
+              <i class="fa fa-trash"></i>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal{{kl.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
+                  </div>
+                  <div class="modal-body">
+                    Apakah anda yakin ingin menghapus Siswa dengan nama <b>{{kl.siswa.nama}}</b> dan id <b>{{kl.id}}</b>?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    <a href="{% url 'karakter:hapus' id=kl.id %}" class="btn btn-danger">
+                      <i class="fa fa-trash"></i> Hapus
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal -->
+          </td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+<!-- #######################################Tambah#################################################################### -->
+  <!-- Modal -->
+  <div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Karakter</h4>
+          </div>
+          <div class="modal-body">
+            <!-- <p>One fine body&hellip;</p> -->
+            <div class="box box-danger">
+              <div class="box-header">
+                <h3 class="box-title">Input Data Karakter Siswa</h3>
+              </div>
+              <div class="box-body">
+                <!-- Date dd/mm/yyyy -->
+                <form method="POST" action="{% url 'karakter:simpan'%}">
+                  {% csrf_token %}
+
+                  <div class="form-group">
+                    <label>Nama Siswa</label>
+                    <div class="input-group">
+                     <div class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </div>
+                    {{form.siswa | add_class:"form-control" |append_attr:"placeholder:Input Siswa"}}
+
+                  </div>
+                </div>
+                <br>
+
+                <div class="form-group">
+                  <label>Sikap</label>
+
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                      <i class="fa fa-mortar-board"></i>
+                    </div>
+
+                    <select class="form-control " name="sikap" id="id_sikap2" onclick="sleksiT()" >
+                      <option selected="selected">Sikap Siswa</option>
+                      <option>Baik</option>
+                      <option>Cukup Baik</option>
+                      <option>Buruk</option>
+                    </select>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <br>
+
+                <div class="form-group">
+                  <label>Olimpiade</label>
+
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                      <i class="fa fa-mortar-board"></i>
+                    </div>
+
+                    <select class="form-control " name="mata_pelajaran" >
+                      <option selected="selected">Pilih Olimpiade</option>
+                      <option value="biologi">Biologi</option>
+                      <option value="matematika">Matematika</option>
+                      <option value="fisika">Fisika</option>
+                      <option value="kimia">Kimia</option>
+                    </select>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+
+
+                <div class="form-group" hidden>
+                  <label>Nilai</label>
+
+                  <div class="input-group">
+                    <div class="input-group-addon">
+                    </div>
+                    <!-- <input type="text" class="form-control" name="nilai" id="id_nilai" value=""> -->
+                    <input type="text" class="form-control" name="nilai" id="id_nilai2" value="">
+                  </div>
+                  <!-- /.input group -->
+                </div>
+
+
+              </div>
+              <!-- /.box-body -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+
+  </div>
+  <!-- /.modal -->
+
+
+  <script >
+
+    function sleksiT() {
+      var a =40 ;
+      var b =55 ;
+      var c =70 ;
+      var d =0;
+      var jjg = document.getElementById('id_sikap2').value;
+      if (jjg === "Baik") {
+        document.getElementById("id_nilai2").value = c;
+
+      }else if (jjg === "Cukup Baik"){
+        document.getElementById("id_nilai2").value = b;
+
+      }else if (jjg === "Buruk"){
+        document.getElementById("id_nilai2").value = a;
+
+      }else {
+        document.getElementById("id_nilai2").value = d;
+
+      }
+    }
+  </script>
+  {% if messages %}
+  {% for message in messages %}
+  <script>
+    toastr.success('{{message}}')
+  </script>
+  {% endfor %}
+  {% endif %}

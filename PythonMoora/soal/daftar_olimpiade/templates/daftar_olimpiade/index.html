@@ -1,0 +1,527 @@
+{% extends 'layout/dashboard/index.html' %} 
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Data
+      <small>Daftar Olimpiade</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i>Daftar Olimpiade</a></li>
+    </ol>
+  </section>
+  <section class="content">
+
+    <div class="row">
+      <div class="col-sm-6">
+       <div class="box">
+        <div class="box-body">
+          <div class="box-header">
+            <h3 class="box-title">Daftar Peserta Olimpiade Fisika</h3>&nbsp;
+            <button  class="btn btn-info pull-right"data-toggle="modal" data-target="#modal-default"  >
+              <i class="fa fa-plus-square"></i>
+            </button>
+          </div>
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <!-- <th>No</th> -->
+                <th>User</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dffis in soalfisika %}
+              <tr>
+                <td>{{dffis.user}}</td>
+                <td>{{dffis.nama}}</td>
+                <td>
+
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{dffis.id}}">
+                    <i class="fa fa-trash"></i>
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="myModal{{dffis.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-md" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
+                        </div>
+                        <div class="modal-body">
+                          Apakah anda yakin ingin menghapus Siswa dengan nama <b>{{dffis.nama}}</b> dan id <b>{{dffis.id}}</b>?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                          <a href="{% url 'daftar_olimpiade:hapusfis' id=dffis.id %}" class="btn btn-danger">
+                            <i class="fa fa-trash"></i> Hapus
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal -->
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col-sm-6">
+      <div class="box">
+        <div class="box-body">
+          <div class="box-header">
+            <h3 class="box-title">Daftar Peserta Olimpiade Biologi</h3>&nbsp;
+            <button  class="btn btn-info pull-right"data-toggle="modal" data-target="#modal-default1"  >
+              <i class="fa fa-plus-square"></i>
+            </button>
+          </div>
+          <table id="example2" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <!-- <th>No</th> -->
+
+                <th>User</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dfbio in soalbiologi %}
+              <tr>
+                <td>{{dfbio.user}}</td>
+                <td>{{dfbio.nama}}</td>
+                <td>
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#myModal1{{dfbio.id}}">
+                    <i class="fa fa-trash"></i>
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="myModal1{{dfbio.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-md" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
+                        </div>
+                        <div class="modal-body">
+                          Apakah anda yakin ingin menghapus Siswa dengan nama <b>{{dfbio.nama}}</b> dan id <b>{{dfbio.id}}</b>?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                          <a href="{% url 'daftar_olimpiade:hapusbio' id=dfbio.id %}" class="btn btn-danger">
+                            <i class="fa fa-trash"></i> Hapus
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal -->
+
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<section class="content">
+
+  <div class="row">
+    <div class="col-sm-6">
+     <div class="box">
+      <div class="box-body">
+        <div class="box-header">
+          <h3 class="box-title">Daftar Peserta Olimpiade Kimia</h3>&nbsp;
+          <button  class="btn btn-info pull-right"data-toggle="modal" data-target="#modal-default2"  >
+            <i class="fa fa-plus-square"></i>
+          </button>
+        </div>
+        <table id="example1" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <!-- <th>No</th> -->
+
+              <th>User</th>
+              <th>Nama</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for dfkim in soalkimia %}
+            <tr>
+              <td>{{dfkim.user}}</td>
+              <td>{{dfkim.nama}}</td>
+              <td>
+               <button class="btn btn-danger" data-toggle="modal" data-target="#myModal2{{dfkim.id}}">
+                <i class="fa fa-trash"></i>
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="myModal2{{dfkim.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-md" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
+                    </div>
+                    <div class="modal-body">
+                      Apakah anda yakin ingin menghapus Siswa dengan nama <b>{{dfkim.nama}}</b> dan id <b>{{dfkim.id}}</b>?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                      <a href="{% url 'daftar_olimpiade:hapuskim' id=dfkim.id %}" class="btn btn-danger">
+                        <i class="fa fa-trash"></i> Hapus
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal -->
+
+
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="col-sm-6">
+  <div class="box">
+    <div class="box-body">
+      <div class="box-header">
+        <h3 class="box-title">Daftar Peserta Olimpiade Matematika</h3>&nbsp;
+        <button  class="btn btn-info pull-right"data-toggle="modal" data-target="#modal-default3"  >
+          <i class="fa fa-plus-square"></i>
+        </button>
+      </div>
+      <table id="example2" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <!-- <th>No</th> -->
+
+            <th>User</th>
+            <th>Nama</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for dfmat in soalmatematika %}
+          <tr>
+            <td>{{dfmat.user}}</td>
+            <td>{{dfmat.nama}}</td>
+            <td>
+             <button class="btn btn-danger" data-toggle="modal" data-target="#myModal3{{dfmat.id}}">
+              <i class="fa fa-trash"></i>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal3{{dfmat.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
+                  </div>
+                  <div class="modal-body">
+                    Apakah anda yakin ingin menghapus Siswa dengan nama <b>{{dfmat.nama}}</b> dan id <b>{{dfmat.id}}</b>?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    <a href="{% url 'daftar_olimpiade:hapusmat' id=dfmat.id %}" class="btn btn-danger">
+                      <i class="fa fa-trash"></i> Hapus
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal -->
+
+
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+</div>
+</div>
+</section>
+</div>
+<!-- ############################################## Modal Input Fisika #################################################-->
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Input Data Daftar Peserta Olimipiade Fisika</h4>
+        </div>
+        <div class="modal-body">
+          <!-- <p>One fine body&hellip;</p> -->
+          <div class="box box-danger">
+            <div class="box-header">
+              <h3 class="box-title">Input Daftar Peserta Olimpiade Fisika</h3>
+            </div>
+            <div class="box-body">
+              <!-- Date dd/mm/yyyy -->
+              <form method="POST" action="{% url 'daftar_olimpiade:simpanfis'%}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                  <label>Nama Siswa</label>
+                  <div class="input-group">
+                   <div class="input-group-addon">
+                    <i class="fa fa-users"></i>
+                  </div>
+                  {{form.user | add_class:"form-control" |append_attr:"placeholder:Input Siswa"}}
+
+                </div>
+              </div>
+              <br>
+
+              <div class="form-group" >
+                <label>Nama</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+
+                  </div>
+                  <input type="text" class="form-control" name="nama"  value="">
+                </div>
+                <!-- /.input group -->
+              </div>
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+  
+</div>
+<!-- /.modal -->
+
+<!-- ##############################################Modal Input Biologi ######################################################-->
+<div class="modal fade" id="modal-default1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Input Data Daftar Peserta Olimipiade Biologi</h4>
+        </div>
+        <div class="modal-body">
+          <!-- <p>One fine body&hellip;</p> -->
+          <div class="box box-danger">
+            <div class="box-header">
+              <h3 class="box-title">Input Daftar Peserta Olimpiade Biologi</h3>
+            </div>
+            <div class="box-body">
+              <!-- Date dd/mm/yyyy -->
+              <form method="POST" action="{% url 'daftar_olimpiade:simpanbio'%}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                  <label>Nama Siswa</label>
+                  <div class="input-group">
+                   <div class="input-group-addon">
+                    <i class="fa fa-users"></i>
+                  </div>
+                  {{form.user | add_class:"form-control" |append_attr:"placeholder:Input Siswa"}}
+
+                </div>
+              </div>
+              <br>
+
+              <div class="form-group" >
+                <label>Nama</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+
+                  </div>
+                  <input type="text" class="form-control" name="nama"  value="">
+                </div>
+                <!-- /.input group -->
+              </div>
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+  
+</div>
+<!-- /.modal -->
+
+<!-- ##############################################Modal Input Kimia ######################################################-->
+<div class="modal fade" id="modal-default2">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Input Data Daftar Peserta Olimipiade Kimia</h4>
+        </div>
+        <div class="modal-body">
+          <!-- <p>One fine body&hellip;</p> -->
+          <div class="box box-danger">
+            <div class="box-header">
+              <h3 class="box-title">Input Daftar Peserta Olimpiade Kimia</h3>
+            </div>
+            <div class="box-body">
+              <!-- Date dd/mm/yyyy -->
+              <form method="POST" action="{% url 'daftar_olimpiade:simpankim'%}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                  <label>Nama Siswa</label>
+                  <div class="input-group">
+                   <div class="input-group-addon">
+                    <i class="fa fa-users"></i>
+                  </div>
+                  {{form.user | add_class:"form-control" |append_attr:"placeholder:Input Siswa"}}
+
+                </div>
+              </div>
+              <br>
+
+              <div class="form-group" >
+                <label>Nama</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+
+                  </div>
+                  <input type="text" class="form-control" name="nama"  value="">
+                </div>
+                <!-- /.input group -->
+              </div>
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+  
+</div>
+<!-- /.modal -->
+
+<!-- ###########################################Modal Input Matematika ######################################################-->
+<div class="modal fade" id="modal-default3">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Input Data Daftar Peserta Olimipiade Matematika</h4>
+        </div>
+        <div class="modal-body">
+          <!-- <p>One fine body&hellip;</p> -->
+          <div class="box box-danger">
+            <div class="box-header">
+              <h3 class="box-title">Input Daftar Peserta Olimpiade Matematika</h3>
+            </div>
+            <div class="box-body">
+              <!-- Date dd/mm/yyyy -->
+              <form method="POST" action="{% url 'daftar_olimpiade:simpanmat'%}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                  <label>Nama Siswa</label>
+                  <div class="input-group">
+                   <div class="input-group-addon">
+                    <i class="fa fa-users"></i>
+                  </div>
+                  {{form.user | add_class:"form-control" |append_attr:"placeholder:Input Siswa"}}
+
+                </div>
+              </div>
+              <br>
+
+              <div class="form-group" >
+                <label>Nama</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+
+                  </div>
+                  <input type="text" class="form-control" name="nama"  value="">
+                </div>
+                <!-- /.input group -->
+              </div>
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+  
+</div>
+<!-- /.modal -->
+
+{% endblock %}

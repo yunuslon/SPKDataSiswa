@@ -1,0 +1,28 @@
+{% extends 'layout/dashboard/index.html' %} {% block content %}
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Data
+            <small>Karakter</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Karakter</a></li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                {% include 'karakter/table.html' %}
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example1').DataTable( {
+            "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50,]]
+        } );
+    } );
+</script>
+{% endblock %}

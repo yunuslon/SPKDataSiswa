@@ -1,0 +1,75 @@
+{% load widget_tweaks %}
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Ubah Bobot</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    {% if form_mode != 'add' %}
+    <form role="form" action="{% url 'bobot:update' %}" method="POST">
+        <input type="hidden" name="id" value="{{id}}" class="form-control"> {% endif %} {% csrf_token %}
+
+
+        <div class="box-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Nilai Akademik</label> {{form.nilai_akademik | add_class:"form-control" |append_attr:"id:na"}}
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Hasil Tes</label> {{form.hasil_tes | add_class:"form-control" |append_attr:"id:ht"}}
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Karakter</label> {{form.karakter | add_class:"form-control" |append_attr:"id:krt" }}
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Kelas</label> {{form.kelas | add_class:"form-control" |append_attr:"id:kl" }}
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Pengalaman Lomba</label> {{form.plomba | add_class:"form-control" |append_attr:"id:pl" }}
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <input type="button" onclick="sleksi()" value="Cek" id="btn2">
+            {% if form_mode != 'add' %}
+            <div hidden id="btn">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-refresh" aria-hidden="true" ></i> Update
+                    {% endif %}
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+
+</div>
+<script>
+    function sleksi() {
+     var a=document.getElementById('na').value;
+     var b=document.getElementById('ht').value;
+     var c=document.getElementById('krt').value;
+     var d=document.getElementById('kl').value;
+     var e=document.getElementById('pl').value;
+     var jwb = parseInt(a) + parseInt(b) + parseInt(c) + parseInt(d) + parseInt(e);
+  
+     if (jwb != 100) {
+        alert("Nilai bobot salah!");
+    }else{
+        document.getElementById('btn').hidden = false;
+        document.getElementById('btn2').hidden = true;
+    }
+}
+</script>
+

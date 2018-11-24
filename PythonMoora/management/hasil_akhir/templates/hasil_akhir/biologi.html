@@ -1,0 +1,56 @@
+<div class="header text-center">
+  <h3 class="title">Hasil Sleksi Olimpide Sains</h3>
+  <p class="category">Kategori Mata Pelajaran <a>Biologi</a></p>
+</div>
+<ul class="nav nav-pills nav-stacked">
+  <div class="row">
+  <div class="col-md-3">
+ <li role="presentation">
+
+  
+    <a  class="btn btn-block btn-social btn-facebook" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-caret-square-o-down"></i> Matrix Awal </a>
+  </li>
+  </div>
+  
+</div>
+ 
+  <div class="collapse" id="collapseExample">
+    <div class="well">
+
+     <div align="right">
+      {% comment %} <a href="{% url 'hasil_akhir:reporttbl' %}"> {% endcomment %}
+       <button class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+     </a>
+   </div>
+   <hr>
+   <table id="example" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Nilai Akademik</th>
+        <th>Karakter</th>
+        <th>Pengalaman Lomba</th>
+        <th>Hasil Tes</th>
+        <th>Kelas</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in tambah_data %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{c.0}}</td>
+        <td>{{c.1}}</td>
+        <td>{{c.2}}</td>
+        <td>{{c.3}}</td>
+        <td>{{c.4}}</td>
+        <td>{{c.5}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+</div>  
+
+

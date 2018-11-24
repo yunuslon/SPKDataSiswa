@@ -1,0 +1,220 @@
+{% extends 'layout/dashboard/index.html' %} {% load staticfiles %}  {% load widget_tweaks %}{% block content %}
+
+<div class="content-wrapper">
+   <section class="content">
+    <div class="box box-default">
+        <div class="box-header with-border">
+          <h3 class="box-title">Input Data Siswa Olimpiade Biologi</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" style="">
+          <div class="row">
+           <form action="{% url 'data_siswa:save_data_siswabio' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-md-6">
+            <div class="form-group">
+                <label for="username">username</label>
+                <input type="text" required name="username" value="" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" required name="password" value="" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Nama</label>
+                <input type="text" class="form-control" name="nama" value="" required>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Jenis Kelamin</label>
+            </div>
+            <div class="form-group">
+                 <input required type="radio" name="jenis_kelamin" value="Laki - Laki"> Laki - Laki &nbsp; &nbsp; &nbsp;
+                <input required type="radio" name="jenis_kelamin" value="Perempuan"> Perempuan
+            </div>
+
+            <div class="form-group">
+                    <label for="" class="control-label">Alamat</label>
+                    <textarea name="alamat" rows="3" class="form-control" required></textarea>
+            </div>
+        
+              
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+            <div class="form-group" hidden>
+                <label for="" class="control-label">Olimpiade</label>
+                <input type="text" class="form-control" name="mata_pelajaran" value="biologi" required>
+            </div>
+
+            {% comment %} <div class="form-group">
+                <label for="" class="control-label">Tanggal Lahir</label>
+                <input required type="text" id="date" class="form-control" name="tanggal_lahir" value="" readonly>
+            </div> {% endcomment %}
+
+            <div class="form-group" >
+                <label for="" class="control-label">Nilai Akademik Biologi</label>
+                <input type="text" class="form-control" name="nilai" value="" required>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Jenjang</label>
+                  <select class="form-control " name="jenjang" id="id_jenjang" onclick="sleksijenjang()" >
+                    <option selected="selected"> --- Pilih Jenjang --- </option>
+                    <option required>1 SMA</option>
+                    <option required>2 SMA</option>
+                    <option required>3 SMA</option>
+                  </select>
+            </div>
+
+            <div class="form-group" hidden >
+                <label for="" class="control-label">Nilai kelas</label>
+                <input type="text" class="form-control" name="nilaikl" id="id_nilaikl" value="" required>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Pengalaman Lomba</label>
+                <select class="form-control " name="intensitas" id="id_intensitas" onclick="sleksiintensitas()" >
+                    <option selected="selected">--- Pilih Intensitas Pengalaman ---</option>
+                    <option required>Sering Mengikuti Olimpiade</option>
+                    <option required>Cukup Sering Mengikuti Olimpiade</option>
+                    <option required>Jarang Mengikuti Olimpiade</option>
+                    <option required>Tidak Pernah Mengikuti Olimpiade</option>
+                </select>
+            </div>
+
+            <div class="form-group" hidden>
+                <label for="" class="control-label">Nilai Pengalaman Lomba</label>
+                <input type="text" class="form-control" name="nilaipl" id="id_nilaipl" value="" required>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Karakter</label>
+                 <select class="form-control " name="sikap" id="id_sikap" onclick="sleksisikap()" >
+                      <option selected="selected">--- Sikap Siswa ---</option>
+                      <option required>Baik</option>
+                      <option required>Cukup Baik</option>
+                      <option required>Buruk</option>
+                </select>
+            </div>
+
+            <div class="form-group" hidden>
+                <label for="" class="control-label">Nilai Karakter</label>
+                <input type="text" class="form-control" id="id_nilaikr" name="nilaikr" value="" required>
+            </div>
+
+
+            <div class="form-group ">
+            <label for="" class="control-label">
+                Aktifkan Langsung User ?
+            </label> &nbsp; <input type="checkbox" name="staff">
+            </div>
+            <br>
+             <div class="form-group">
+                <button type="submit" class="btn btn-success pull-right" style="margin-left: 8px;">Simpan</button>
+                <a href="{% url 'data_siswa:biologi'%}" class="btn btn-danger pull-right">
+                    <i class="fa fa-arrow-left"></i> Kembali</a>
+            </div>
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+             </form>
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+    
+
+    </section>
+</div>
+
+<script >
+
+  function sleksijenjang() {
+    var a =40 ;
+    var b =55 ;
+    var c =70 ;
+    var d =0;
+    var jjg = document.getElementById('id_jenjang').value;
+    if (jjg === "1 SMA") {
+      document.getElementById("id_nilaikl").value = b;
+
+    }else if (jjg === "2 SMA"){
+      document.getElementById("id_nilaikl").value = a;
+
+    }else if (jjg === "3 SMA"){
+      document.getElementById("id_nilaikl").value = c;
+
+    }else {
+      document.getElementById("id_nilaikl").value = d;
+
+    }
+  }
+
+function sleksiintensitas() {
+    var a =70 ;
+    var b =55 ;
+    var c =40 ;
+    var d =25 ;
+    var jjg = document.getElementById('id_intensitas').value;
+    if (jjg === "Sering Mengikuti Olimpiade") {
+      document.getElementById("id_nilaipl").value = a;
+
+  }else if (jjg === "Cukup Sering Mengikuti Olimpiade"){
+      document.getElementById("id_nilaipl").value = b;
+
+  }else if (jjg === "Jarang Mengikuti Olimpiade"){
+      document.getElementById("id_nilaipl").value = c;
+
+  }else if (jjg === "Tidak Pernah Mengikuti Olimpiade") {
+      document.getElementById("id_nilaipl").value = d;
+
+  }else{
+    document.getElementById("id_nilaipl").value = 0 ;
+  }
+}
+
+function sleksisikap() {
+      var a =40 ;
+      var b =55 ;
+      var c =70 ;
+      var d =0;
+      var jjg = document.getElementById('id_sikap').value;
+      if (jjg === "Baik") {
+        document.getElementById("id_nilaikr").value = c;
+
+      }else if (jjg === "Cukup Baik"){
+        document.getElementById("id_nilaikr").value = b;
+
+      }else if (jjg === "Buruk"){
+        document.getElementById("id_nilaikr").value = a;
+
+      }else {
+        document.getElementById("id_nilaikr").value = d;
+
+      }
+    }
+
+$('#date').datepicker();
+
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#picture').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+{%endblock%}

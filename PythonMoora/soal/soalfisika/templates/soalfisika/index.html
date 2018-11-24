@@ -1,0 +1,147 @@
+{% extends 'layout/tesolimpiade/index.html' %} {% block content %}
+
+<h2 align="center" id="bla" hidden  >{{tesolimpiade.total}}</h2>
+<h2 align="center"  hidden>{{request.user.siswa.nama}}</h2>
+
+<div class="col-md-12" align="justify">
+  <div class="content-wrapper" style="min-height: 1126px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+     <div class="callout callout-info" style="margin-bottom: 0!important;" >
+      <h4><i class="fa fa-info"></i> Note:</h4>
+    Baca soal dengan teliti, dan jangan lupa berdoa sebelum menjawab :)</div>
+      <!-- <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
+        <li class="active">Blank page</li>
+      </ol> -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <!-- <h3 class="box-title">Title</h3> -->
+          <i class="fa fa-globe"></i> Soal Tes Sleksi Calon Peserta Olimpiade Sains
+          <small class="pull-right"></small>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+              <i class="fa fa-minus"></i></button>
+              
+            </div>
+          </div>
+          <div class="box-body">
+            <!-- </div> -->
+            <!-- /.col -->
+            <div class="col-md-1"></div>
+            <div class="col-md-12" align="justify">
+
+              {% for tp in tesolimpiade2  %}
+              {% if tp.1 ==  "../media/gambar/icon.png"  %}
+              <p style="font-size: 12pt; font-weight: bold;">{{tp.0}}. {{tp.2}}</p>
+              <p>A. {{tp.3}}</p>
+              <p>B. {{tp.4}}</p>
+              <p>C. {{tp.5}}</p>
+              <p>D. {{tp.6}}</p>
+              <p>E. {{tp.7}}</p>
+              <input type="text" id="kunci{{tp.0}}" value="{{tp.8}}" hidden>
+              <label>Jawab --> &nbsp;</label><input type="text" id="jwb{{tp.0}}" class="jaw" maxlength="1">
+              <br/>
+              <br/>
+              {% else %}
+              <p style="font-size: 12pt; font-weight: bold;">{{tp.0}}. {{tp.2}}</p>
+              <img src="../../../media/{{tp.1}}" height="200px ">
+              <p>A. {{tp.3}}</p>
+              <p>B. {{tp.4}}</p>
+              <p>C. {{tp.5}}</p>
+              <p>D. {{tp.6}}</p>
+              <p>E. {{tp.7}}</p>
+              <input type="text" id="kunci{{tp.0}}" value="{{tp.8}}" hidden>
+              <label>Jawab --> &nbsp;</label><input type="text" id="jwb{{tp.0}}" class="jaw" maxlength="1">
+              <br/>
+              <br/>
+
+              {% endif %}
+
+              {% endfor %}
+              <p id="butt"><button class="btn btn-primary" onclick="ax()">Simpan</button></p>
+              <hr/>
+              <div  align="center">
+                <form  method="POST" action="{% url 'soalfisika:simpan' %}">
+                  {% csrf_token %}
+                  <input type="text" name="mata_pelajaran"  value="fisika" hidden>
+                  <input type="text" name="nilai" id="hasil" value="" hidden>
+                  <p id="butt2" hidden><button class="btn btn-primary">Kirim</button></p>
+
+                </form>
+              </div>
+              
+              <hr/>
+
+            </div>
+            <div class="col-md-1"></div>
+
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <i class="fa fa-thumbs-up"></i> Semoga hasil di dapatkan memuaskan
+          </div>
+          <!-- /.box-footer-->
+        </div>
+        <!-- /.box -->
+
+      </section>
+      <!-- /.content -->
+    </div>
+  </div>
+  <!-- <div class="col-md-1"></div> -->
+  <script>
+    function ax() {
+      var x = document.getElementById('bla');
+      var jawab;
+      var button = document.getElementById('butt');
+      var button2 = document.getElementById('butt2');
+      button.hidden = true;
+      button2.hidden = false;
+      var kunci;
+      var benar=[];
+      var salah=[];
+      for (var i = 1; i <= x.innerHTML; i++) {
+        jawab = document.getElementById("jwb"+i).value;
+        kunci = document.getElementById("kunci"+i).value;
+          // console.log(jawab + "" + kunci);
+          if (jawab == ''){
+            alert('Masih ada jawaban yang kosong!');
+          }else{
+            if (jawab == kunci){
+              benar.push('1');
+            }else{
+              salah.push('0');
+            }
+          }
+        }
+        var hasilB = benar.length;
+        hasilB = hasilB * 100 / parseInt(x.innerHTML);
+        var hasilS = salah.length;
+        document.getElementById("hasil").hidden = false;
+        document.getElementById("hasil").value = hasilB;
+        console.log("Nilai : " + hasilB + "--" + "Jumlah salah : " + hasilS);
+      }
+    </script>
+    <style>
+    .jaw{
+      box-shadow: 2px 2px 2px black;
+      width: 40px;
+      border-radius: 5px;
+      text-transform: capitalize;
+      text-align: center;
+    }
+  </style>
+
+
+
+  {% endblock %}
+

@@ -1,0 +1,120 @@
+{% extends 'layout/dashboard/index.html' %} 
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Karakter
+      <small>Template</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Karakter</a>
+        </li>
+        <li class="active">Template</li>
+      </ol>
+    </section>
+
+    <section class="content">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              Edit Data Karakter
+            </div>
+            <div class="box-body">
+
+              <div class="col-md-12 col-sm-9">
+                <form  role="form" action="{% url 'karakter:update' %}" method="POST"> 
+                  <input type="hidden" name="id" value="{{id}}" class="form-control">
+                  {% csrf_token %}
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1" class="control-label">Siswa</label>
+                      {{form.siswa | add_class:"form-control" }}
+                    </div>
+                  </div>
+
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1" class="control-label">Olimpiade</label>
+                      <select class="form-control " name="mata_pelajaran" >
+                        <option selected >Pilih Olimpiade</option>
+                        <option value="biologi" >Biologi</option>
+                        <option value="matematika">Matematika</option>
+                        <option value="fisika">Fisika</option>
+                        <option value="kimia">Kimia</option>
+                      </select>
+                    </div>
+                  </div>
+
+                   <div class="box-body">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1" class="control-label">Sikap</label>
+                      <select class="form-control " name="sikap" id="id_sikap" onclick="sleksi()">
+                        <option selected="selected">Pilih Sikap</option>
+                        <option >Baik</option>
+                        <option >Cukup Baik</option>
+                        <option >Buruk</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="box-body" hidden >
+                    <div class="form-group">
+                      <label for="exampleInputEmail1" class="control-label">Nilai</label>
+                      <div >
+                        {{form.nilai | add_class:"form-control" |append_attr:"id:id_nilai" }}
+                      </div>
+                    </div>
+                  </div>
+
+                  
+
+                  <!-- /.box-body -->            
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">
+
+                      <i class="fa fa-refresh" aria-hidden="true"></i> Update
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  
+  function sleksi() {
+    var a =40 ;
+    var b =55 ;
+    var c =70 ;
+    var d =0;
+    var jjg = document.getElementById('id_sikap').value;
+    if (jjg === "Baik") {
+      document.getElementById("id_nilai").value = c;
+
+    }else if (jjg === "Cukup Baik"){
+      document.getElementById("id_nilai").value = b;
+
+    }else if (jjg === "Buruk"){
+      document.getElementById("id_nilai").value = a;
+
+    }else {
+      document.getElementById("id_nilai").value = d;
+
+    }
+  }
+</script>
+
+
+
+{% endblock %}

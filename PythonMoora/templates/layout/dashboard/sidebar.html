@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="header">MAIN NAVIGATION</li>
+      <li class="header"></li>
+      <li>
+        <a href="{% url 'admin:index' %}">
+          <i class="fa fa-user"></i> Admin Site</a>
+
+        </li>
+        <!-- <li class="header"></li> -->
+
+        <li><a href="{% url 'bobot:view' %}">  <i class="fa fa-gears"></i> Bobot</a></li>
+        <li><a href="{% url 'data_siswa:view' %}">  <i class="fa fa-gears"></i> Tambah Data</a></li>
+
+        <!-- <li class="header"></li> -->
+        <li class="treeview active menu-open">
+          <a href="#">
+            <i class="fa fa-database"></i>
+            <span>Data Peserta</span>
+          </a>
+          <ul class="treeview-menu">    
+            <li><a href="{% url 'data_siswa:biologi' %}"><i class="fa fa-circle-o"></i>Olimpiade Biologi</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>Olimpiade Fisikia</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>Olimpiade Kimia</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>Olimpiade Matematika</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview active menu-open">
+          <a href="#">
+            <i class="fa fa-database"></i>
+            <span>Data Siswa</span>
+          </a>
+          <ul class="treeview-menu">    
+            <li><a href="{% url 'siswa:view' %}"><i class="fa fa-circle-o"></i>Siswa</a></li>
+            <li><a href="{% url 'nilai_akademik:view' %}"><i class="fa fa-circle-o"></i>Nilai Akademik</a></li>
+            <li><a href="{% url 'karakter:view' %}"><i class="fa fa-circle-o"></i>Karakter</a></li>
+            <li><a href="{% url 'plomba:view' %}"><i class="fa fa-circle-o"></i>Pengalaman Lomba</a></li>
+            <li><a href="{% url 'hasiltes:view' %}"><i class="fa fa-circle-o"></i>Hasil Tes</a></li>
+            <li><a href="{% url 'kelas:view' %}"><i class="fa fa-circle-o"></i>Kelas</a></li>
+          </ul>
+        </li>
+        <li><a href="{% url 'hasil_akhir:view' %}">  <i class="fa fa-mortar-board"></i> Mata Pelajaran</a></li>
+        
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+
+  

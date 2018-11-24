@@ -1,0 +1,39 @@
+{% extends 'layout/dashboard/index.html' %} {% block content %}
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+           Hasil Olimpiade Sains
+       </h1>
+       <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Hasil Matrix</a></li>
+        <li class="active">Mata Pelajaran</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="contoh">
+                <ul class="nav nav-tabs">
+                    <li><a href="{% url 'hasil_akhir:biologi' %}">Biologi</a></li>
+                    <li><a href="{% url 'hasil_akhir:fisika' %}">Fisika</a></li>
+                    <li><a href="{% url 'hasil_akhir:kimia' %}">Kimia</a></li>
+                    <li><a href="{% url 'hasil_akhir:matematika' %}">Matematika</a></li>
+                </ul>
+            </div>
+           
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example1').DataTable( {
+                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50,]]
+            } );
+        } );
+    </script>
+    <script>
+      $('#contoh').tabs();
+  </script>
+  {% endblock %}

@@ -1,0 +1,188 @@
+<div class="header text-center"><h3 class="title">Hasil Sleksi Olimpide Sains</h3><p class="category">Kategori Mata Pelajaran <a >Fisika</a></p></div>
+
+<ul class="nav nav-pills nav-stacked">
+  <div class="row">
+    <div class="col-md-3">
+      <li role="presentation"><a class="btn btn-block btn-social btn-facebook" type="button" data-toggle="collapse" data-target="#collapseExamplefis" aria-expanded="false" aria-controls="collapseExamplefis">
+        <i class="fa fa-caret-square-o-down"></i>Matrix Awal</a></li>    
+      </div>
+    </div>
+
+    <div class="collapse" id="collapseExamplefis">
+      <div class="well">
+
+       <div align="right">
+        <a href="{% url 'hasil_akhir:reporttbl' %}">
+         <button class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+       </a>
+     </div>
+     <hr>
+     <table id="example" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Nilai Akademik</th>
+          <th>Karakter</th>
+          <th>Pengalaman Lomba</th>
+          <th>Hasil Tes</th>
+          <th>Kelas</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in data_awal %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{c.0}}</td>
+          <td>{{c.1}}</td>
+          <td>{{c.2}}</td>
+          <td>{{c.3}}</td>
+          <td>{{c.4}}</td>
+          <td>{{c.5}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+</div>  
+<!-- ###################################################################### -->
+<br>
+<div class="row">
+  <div class="col-md-3">
+    <li role="presentation"><a class="btn btn-block btn-social btn-facebook" type="button" data-toggle="collapse" data-target="#collapseExamplefis1" aria-expanded="false" aria-controls="collapseExamplefis1"><i class="fa fa-caret-square-o-down"></i>Matrix Ternormalisasi</a></li>    
+  </div>
+</div>
+
+<div class="collapse" id="collapseExamplefis1">
+  <div class="well">
+
+   <div align="right">
+    <a href="{% url 'hasil_akhir:reporttbl' %}">
+     <button class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+   </a>
+ </div>
+ <hr>
+ <table id="example" class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama</th>
+      <th>Nilai Akademik</th>
+      <th>Karakter</th>
+      <th>Pengalaman Lomba</th>
+      <th>Hasil Tes</th>
+      <th>Kelas</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in ternormalisasi %}
+    <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{c.0}}</td>
+      <td>{{c.1}}</td>
+      <td>{{c.2}}</td>
+      <td>{{c.3}}</td>
+      <td>{{c.4}}</td>
+      <td>{{c.5}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</div>
+</div>  
+
+<br>
+
+<div class="row">
+  <div class="col-md-3">
+    <li role="presentation">
+      <a class="btn btn-block btn-social btn-facebook" type="button" data-toggle="collapse" 
+      data-target="#collapseExamplefis2" aria-expanded="false" aria-controls="collapseExamplefis2">
+      <i class="fa fa-caret-square-o-down"></i>Matrix Pembobotan</a></li>    
+    </div>
+  </div>
+
+  <div class="collapse" id="collapseExamplefis2">
+    <div class="well">
+
+     <div align="right">
+      <a href="{% url 'hasil_akhir:reporttbl' %}">
+       <button class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+     </a>
+   </div>
+   <hr>
+   <table id="example" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Nilai Akademik</th>
+        <th>Karakter</th>
+        <th>Pengalaman Lomba</th>
+        <th>Hasil Tes</th>
+        <th>Kelas</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in pembobotan %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{c.0}}</td>
+        <td>{{c.1}}</td>
+        <td>{{c.2}}</td>
+        <td>{{c.3}}</td>
+        <td>{{c.4}}</td>
+        <td>{{c.5}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+</div>  
+<br>
+
+<div class="row">
+  <div class="col-md-3">
+    <li role="presentation"><a class="btn btn-block btn-social btn-facebook" type="button" data-toggle="collapse" data-target="#collapseExamplefis3" aria-expanded="false" aria-controls="collapseExamplefis3"><i class="fa fa-caret-square-o-down"></i>Hasil Akhir</a></li>    
+  </div>
+</div>
+
+<div class="collapse" id="collapseExamplefis3">
+  <div class="well">
+
+   <div align="right">
+    <a href="{% url 'hasil_akhir:reporttbl' %}">
+     <button class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+   </a>
+ </div>
+ <hr>
+ <table id="example" class="table table-bordered table-striped">
+  <thead>
+   <tr>
+    <th>No</th>
+    <th>Nama</th>
+    <th>Benefit</th>
+    <th>Cost</th>
+    <th>Rangking</th>
+  </tr>
+</thead>
+<tbody>
+  {% for c in akhir %}
+  <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{c.0}}</td>
+    <td>{{c.1}}</td>
+    <td>{{c.2}}</td>
+    <td>{{c.3}}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+
+</div>
+</div>  
+</ul>
+

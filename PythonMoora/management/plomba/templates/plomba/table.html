@@ -1,0 +1,199 @@
+{% load widget_tweaks %}
+<div class="box">
+    <div class="box-body">
+        <div class="box-header">
+            <a type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default"> 
+             Tambah <i class="fa fa-plus"></i> 
+         </a>
+     </div>
+     <table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Olimpiade</th>
+                <th>Intensitas</th>
+                <th>Aksi</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for kl in plomba %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{kl.siswa.nama}}</td>
+                <td>{{kl.mata_pelajaran}}</td>
+                <td>{{kl.intensitas}}</td>
+                <td>
+                 <a href="{% url 'plomba:edit' kl.id %}" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+              </a>
+              <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{kl.id}}">
+                  <i class="fa fa-trash"></i>
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="myModal{{kl.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog modal-md" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
+                    </div>
+                    <div class="modal-body">
+                        Apakah anda yakin ingin menghapus Siswa dengan nama <b>{{kl.siswa.nama}}</b> dan id <b>{{kl.id}}</b>?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                        <a href="{% url 'plomba:hapus' id=kl.id %}" class="btn btn-danger">
+                          <i class="fa fa-trash"></i> Hapus
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Modal -->
+  </td>
+</tr>
+
+
+{% endfor %}
+
+</tbody>
+</table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Pengalaman Lomba</h4>
+      </div>
+      <div class="modal-body">
+          <!-- <p>One fine body&hellip;</p> -->
+          <div class="box box-danger">
+            <div class="box-header">
+              <h3 class="box-title">Input Data Pengalaman Lomba</h3>
+          </div>
+          <div class="box-body">
+              <!-- Date dd/mm/yyyy -->
+              <form method="POST" action="{% url 'plomba:simpan'%}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                  <label>Nama Siswa</label>
+                  <div class="input-group">
+                     <div class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    {{form.siswa | add_class:"form-control" |append_attr:"placeholder:Input Siswa"}}
+
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label>Intensitas Pengalaman Lomba</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-mortar-board"></i>
+                </div>
+
+                <select class="form-control " name="intensitas" id="id_intensitas" onclick="sleksi()" >
+                    <option selected="selected">Pilih Intensitas Pengalaman</option>
+                    <option>Sering Mengikuti Olimpiade</option>
+                    <option>Cukup Sering Mengikuti Olimpiade</option>
+                    <option>Jarang Mengikuti Olimpiade</option>
+                    <option>Tidak Pernah Mengikuti Olimpiade</option>
+                </select>
+            </div>
+            <!-- /.input group -->
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label>Olimpiade</label>
+
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-mortar-board"></i>
+            </div>
+
+            <select class="form-control " name="mata_pelajaran" >
+                <option selected="selected">Pilih Olimpiade</option>
+                <option value="biologi">Biologi</option>
+                <option value="matematika">Matematika</option>
+                <option value="fisika">Fisika</option>
+                <option value="kimia">Kimia</option>
+            </select>
+        </div>
+        <!-- /.input group -->
+    </div>
+
+
+    <div class="form-group" hidden>
+        <label>Nilai</label>
+
+        <div class="input-group">
+          <div class="input-group-addon">
+          </div>
+          <input type="text" class="form-control" name="nilai" id="id_nilai" >
+      </div>
+      <!-- /.input group -->
+  </div>
+
+
+</div>
+<!-- /.box-body -->
+</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+  <button class="btn btn-primary">Save</button>
+</form>
+</div>
+</div>
+<!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+
+</div>
+<!-- /.modal -->
+
+
+<script >
+
+  function sleksi() {
+    var a =70 ;
+    var b =55 ;
+    var c =40 ;
+    var d =25 ;
+    var jjg = document.getElementById('id_intensitas').value;
+    if (jjg === "Sering Mengikuti Olimpiade") {
+      document.getElementById("id_nilai").value = a;
+
+  }else if (jjg === "Cukup Sering Mengikuti Olimpiade"){
+      document.getElementById("id_nilai").value = b;
+
+  }else if (jjg === "Jarang Mengikuti Olimpiade"){
+      document.getElementById("id_nilai").value = c;
+
+  }else if (jjg === "Tidak Pernah Mengikuti Olimpiade") {
+      document.getElementById("id_nilai").value = d;
+
+  }else{
+    document.getElementById("id_nilai").value = 0 ;
+  }
+}
+</script>
+{% if messages %}
+{% for message in messages %}
+<script>
+    toastr.success('{{message}}')
+</script>
+{% endfor %}
+{% endif %}

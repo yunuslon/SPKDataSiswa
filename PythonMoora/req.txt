@@ -1,0 +1,11 @@
+django==1.11.7
+django-material==1.1.1
+pandas
+npm
+nodejs
+django-extensions
+django-braces
+xhtml2pdf
+ipython
+django-auth-mixins
+

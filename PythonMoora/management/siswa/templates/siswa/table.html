@@ -1,0 +1,154 @@
+{% load widget_tweaks %}
+
+<div class="box">
+  <div class="box-body">
+    <div class="box-header">
+      <!-- <h3 class="box-title">Siswa</h3> -->
+      <a type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default"> 
+       Tambah <i class="fa fa-plus"></i> 
+     </a>
+   </div>
+   <table id="example1" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>No</th>
+        <!-- <th>ID</th> -->
+        <th>Nama</th>
+        <th>Jenis Kelamin</th>
+        <th>Alamat</th>
+        <th>User</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sw in siswa %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <!-- <td>{{sw.id}}</td> -->
+        <td>{{sw.nama}}</td>
+        <td>{{sw.jenis_kelamin}}</td>
+        <td>{{sw.alamat}}</td>
+        <td>{{sw.user}}</td>
+
+        <td>
+         <a href="{% url 'siswa:edit' sw.id %}" class="btn btn-warning">
+          <i class="fa fa-edit"></i>
+        </a>
+        <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{sw.id}}">
+          <i class="fa fa-trash"></i>
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal{{sw.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
+              </div>
+              <div class="modal-body">
+                Apakah anda yakin ingin menghapus Siswa dengan nama <b>{{sw.nama}}</b> dan id <b>{{sw.id}}</b>?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                <a href="{% url 'siswa:hapus' id=sw.id %}" class="btn btn-danger">
+                  <i class="fa fa-trash"></i> Hapus
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+<!-- #################################Tambah############################################## -->
+
+<!-- Modal -->
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Siswa</h4>
+        </div>
+        <div class="modal-body">
+          <!-- <p>One fine body&hellip;</p> -->
+          <div class="box box-danger">
+            <div class="box-header">
+              <h3 class="box-title">Input Data Siswa</h3>
+            </div>
+            <div class="box-body">
+              <!-- Date dd/mm/yyyy -->
+              <form method="POST" action="{% url 'siswa:simpan'%}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                  <label>User</label>
+                  <div class="input-group">
+                   <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  {{form.user | add_class:"form-control" |append_attr:"placeholder:Input User"}}
+                </div>
+              </div>
+              <br>
+
+              <div class="form-group">
+                <label>Nama Siswa</label>
+                <div class="input-group">
+                 <div class="input-group-addon">
+                  <i class="fa fa-user"></i>
+                </div>
+                <input type="text" name="nama" class="form-control pull-right" value="">
+              </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <label>Jenis kelamin</label>
+
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa  fa-venus-mars"></i>
+                </div>
+
+                <select class="form-control " name="jenis_kelamin"  >
+                  <option value="Laki - Laki">Laki - Laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
+              </div>
+              <!-- /.input group -->
+            </div>
+            <br>
+
+            <div class="form-group">
+              <label>Alamat</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa  fa-road"></i>
+                </div>
+                <textarea name="alamat" rows="3" class="form-control"></textarea>
+              </div>
+            </div>
+            <br>
+          </div>
+          <!-- /.box-body -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button class="btn btn-primary">Save</button>
+      </form>
+    </div>
+  </div>
+  <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+
+</div>
