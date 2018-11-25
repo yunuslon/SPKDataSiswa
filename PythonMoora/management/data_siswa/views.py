@@ -136,13 +136,12 @@ class UbahBioView(ManagementAccessView):
 
 class UpdateBioView(ManagementAccessView):
     def post(self, request, id):
-        user = User.objects.get(id=id)
-        soalbiologi = SoalBiologi.objects.get(id=id)
+        # user = User.objects.get(id=id)
         siswa = Siswa.objects.get(id=id)
-        nilaiak = NilaiAkademik.objects.get(id=id)
-        kelas = Kelas.objects.get(id=id)
-        plomba = Plomba.objects.get(id=id)
-        karakter = Karakter.objects.get(id=id)
+        # nilaiak = NilaiAkademik.objects.get(id=id)
+        # kelas = Kelas.objects.get(id=id)
+        # plomba = Plomba.objects.get(id=id)
+        # karakter = Karakter.objects.get(id=id)
 
         siswa_form = SiswaForm(request.POST or None, request.FILES)
         nilaiakademik_form = NilaiAkademikForm(request.POST or None)
@@ -160,7 +159,7 @@ class UpdateBioView(ManagementAccessView):
                 siswa.user = user
             
         
-            siswa.user = user
+            # siswa.user = user
             siswa.nama = siswa_form.cleaned_data['nama']
             siswa.tanggal_lahir= siswa_form.cleaned_data['tanggal_lahir']
             siswa.alamat = siswa_form.cleaned_data['alamat']
@@ -168,32 +167,32 @@ class UpdateBioView(ManagementAccessView):
             siswa.save(force_update=True)
 
            
-            nilaiak.siswa = siswa
-            nilaiak.mata_pelajaran = nilaiakademik_form.cleaned_data['mata_pelajaran']
-            nilaiak.nilai =nilaiakademik_form.cleaned_data['nilai']
-            nilaiak.save(force_update=True)
+            # siswa.nilai_akademis = siswa
+            siswa.nilai_akademiks.mata_pelajaran = nilaiakademik_form.cleaned_data['mata_pelajaran']
+            siswa.nilai_akademiks.nilai =nilaiakademik_form.cleaned_data['nilai']
+            siswa.nilai_akademiks.save(force_update=True)
 
            
-            kelas.siswa = siswa
-            kelas.mata_pelajaran = nilaiakademik_form.cleaned_data['mata_pelajaran']
-            kelas.jenjang = kelas_form.cleaned_data['jenjang']
-            kelas.nilai = kelas_form.cleaned_data['nilaikl']
-            kelas.save(force_update=True) 
+            # siswa.kelass = siswa
+            siswa.kelass.mata_pelajaran = nilaiakademik_form.cleaned_data['mata_pelajaran']
+            siswa.kelass.jenjang = kelas_form.cleaned_data['jenjang']
+            siswa.kelass.nilai = kelas_form.cleaned_data['nilaikl']
+            siswa.kelass.save(force_update=True) 
 
 
-            plomba.siswa = siswa
-            plomba.mata_pelajaran = nilaiakademik_form.cleaned_data['mata_pelajaran']
-            plomba.intensitas = plomba_form.cleaned_data['intensitas']
-            plomba.nilai = plomba_form.cleaned_data['nilaipl']
-            plomba.save(force_update=True)
+            # siswa.plombas = siswa
+            siswa.plombas.mata_pelajaran = nilaiakademik_form.cleaned_data['mata_pelajaran']
+            siswa.plombas.intensitas = plomba_form.cleaned_data['intensitas']
+            siswa.plombas.nilai = plomba_form.cleaned_data['nilaipl']
+            siswa.plombas.save(force_update=True)
 
 
-            karakter.siswa = siswa
-            karakter.mata_pelajaran = nilaiakademik_form.cleaned_data['mata_pelajaran']
-            karakter.sikap = karakter_form.cleaned_data['sikap']
-            karakter.nilai = karakter_form.cleaned_data['nilaikr']
-            karakter.save(force_update=True)
+            # siswa.karakters = siswa
+            siswa.karakters.mata_pelajaran = nilaiakademik_form.cleaned_data['mata_pelajaran']
+            siswa.karakters.sikap = karakter_form.cleaned_data['sikap']
+            siswa.karakters.nilai = karakter_form.cleaned_data['nilaikr']
+            siswa.karakters.save(force_update=True)
 
-            return redirect('data_siswa:biologi', id=id)
+            return redirect('data_siswa:biologi')
         else:
             return HttpResponse(siswa_form.errors)

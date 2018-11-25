@@ -14,7 +14,7 @@
 
     <section class="content">
         <div class="row">
-            <div class="col-md-9 col-md-offset-0">
+            <div class="col-md-12 col-md-offset-0">
                 <div class="box box-success">
                     <div class="box-body">
                         <div class="col-md-12 col-sm-0">
@@ -72,9 +72,8 @@
                                 </tbody>
                             </table>
 
-                            <a href="#" class="pull-right" style="margin-left: 16px;">Tambah Soal &raquo;</a> 
-                            <a href="{% url 'data_siswa:biologi' %}" class="pull-right">&laquo; Kembali</a>
-                            <a href="{% url 'data_siswa:editbio' siswa.id %}" class="pull-right">&laquo; Edit</a>
+                            
+                            <a href="{% url 'data_siswa:editbio' siswa.id %}" class="btn btn-primary pull-right"><i class="fa fa-pencil-square-o"></i> Edit</a>
 
                         </div>
                     </div>

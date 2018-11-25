@@ -51,7 +51,7 @@
             </div>
             <!-- /.col -->
             <div class="col-md-6">
-            <div class="form-group" hidden>
+            <div class="form-group" >
                 <label for="" class="control-label">Olimpiade</label>
                 <input type="text" class="form-control" name="mata_pelajaran" value="biologi" required>
             </div>
@@ -76,7 +76,7 @@
                   </select>
             </div>
 
-            <div class="form-group" hidden >
+            <div class="form-group"  >
                 <label for="" class="control-label">Nilai kelas</label>
                 <input type="text" class="form-control" name="nilaikl" id="id_nilaikl" value="{{siswa.kelass.nilai}}" required>
             </div>
@@ -107,18 +107,18 @@
                 </select>
             </div>
 
-            <div class="form-group" hidden>
+            <div class="form-group" >
                 <label for="" class="control-label">Nilai Karakter</label>
                 <input type="text" class="form-control" id="id_nilaikr" name="nilaikr" value="{{siswa.karakters.nilai}}" required>
             </div>
 
 
-            <div class="form-group ">
+            {% comment %} <div class="form-group ">
             <label for="" class="control-label">
                 Aktifkan Langsung User ?
             </label> &nbsp; <input type="checkbox" name="staff">
             </div>
-            <br>
+            <br> {% endcomment %}
             
           
       </div>
