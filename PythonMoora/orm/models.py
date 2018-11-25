@@ -9,6 +9,7 @@ from orm import FileUploader
 class Siswa(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nama = models.CharField(max_length=100, blank=True, null=True)
+    tanggal_lahir = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     Laki = 'Laki - Laki'
     Perempuan = 'Perempuan'
     JK_CHOICES  = (

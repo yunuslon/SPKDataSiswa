@@ -1,0 +1,86 @@
+{% extends 'layout/dashboard/index.html' %} {% block content %}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+           Detail Soal Olimpiade
+            <small>{{detailsoal.mata_pelajaran}}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Detail Soal Olimpiade</a></li>
+            <li class="active">Template</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-9 col-md-offset-0">
+                <div class="box box-success">
+                    <div class="box-body">
+                        <div class="col-md-12 col-sm-0">
+                            <table class="table table-responsive table-striped table-hover">
+                                <tbody>
+                                        <tr>
+                                                <td style="width: 30%">Username</td>
+                                                <td>:</td>
+                                                <td>{{siswa.user.username}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Nama</td>
+                                                <td>:</td>
+                                                <td>{{siswa.nama}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Alamat</td>
+                                                <td>:</td>
+                                                <td>{{siswa.alamat}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Tanggal Lahir</td>
+                                                <td>:</td>
+                                                <td>{{siswa.tanggal_lahir}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Jenis Kelamin</td>
+                                                <td>:</td>
+                                                <td>{{siswa.jenis_kelamin}}
+                                                </td>
+                                            </tr>
+                                           
+                                            <tr>
+                                                <td style="width: 30%">Nilai Akademik {{siswa.nilai_akademiks.mata_pelajaran}}</td>
+                                                <td>:</td>
+                                                <td>{{siswa.nilai_akademiks.nilai}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="width: 30%">Kelas</td>
+                                                <td>:</td>
+                                                <td>{{siswa.kelass.jenjang}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Karakter Siswa</td>
+                                                <td>:</td>
+                                                <td>{{siswa.karakters.sikap}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 30%">Intensitas Pengalaman Lomba</td>
+                                                <td>:</td>
+                                                <td>{{siswa.plombas.intensitas}}</td>
+                                            </tr>
+                                </tbody>
+                            </table>
+
+                            <a href="#" class="pull-right" style="margin-left: 16px;">Tambah Soal &raquo;</a> 
+                            <a href="{% url 'data_siswa:biologi' %}" class="pull-right">&laquo; Kembali</a>
+                            <a href="{% url 'data_siswa:editbio' siswa.id %}" class="pull-right">&laquo; Edit</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</section>
+{% endblock %}

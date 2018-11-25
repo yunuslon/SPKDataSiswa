@@ -20,29 +20,29 @@
                 <table id="example1" class="table table-responsive table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>Olimpiade</th>
-                            <th>Nama</th>
                             <th>Username</th>
+                            <th>Nama</th>
+                            <th>Tanggal_lahir</th>
+                            <th>Jenis Kelamin</th>
                             <th>Alamat</th>
-                            <th>Nilai Akademik</th>
-                            <th>Kelas</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                         <tbody>
-                        {% for a in data_siswa %}
+                        {% for a in siswa %}
                             <tr>
-                                <td>{{a.4}}</td>
-                                <td>{{a.2}}</td>
-                                <td>{{a.1}}</td>
-                                <td>{{a.3}}</td>
-                                <td>{{a.5}}</td>
-                                <td>{{a.6}}</td>
-                                <td>
-                                    <a href="#" class="btn btn-info">
+                                <td>{{a.siswa.user}}</td>
+                                <td>{{a.siswa.nama}}</td>
+                                <td>{{a.siswa.tanggal_lahir}}</td>
+                                <td>{{a.siswa.jenis_kelamin}}</td>
+                                <td>{{a.siswa.alamat}}</td>
+
+                                
+                                <td >
+                                    <a href="{% url 'data_siswa:detailbio' a.siswa_id %}" class="btn btn-info">
                                             <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="{% url 'data_siswa:hapus_data_siswabio' id=a.0%}" class="btn btn-warning">
+                                    <a href="{% url 'data_siswa:hapus_data_siswabio' id=a.siswa.user_id%}" class="btn btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
@@ -115,10 +115,10 @@
                 <input type="text" class="form-control" name="mata_pelajaran" value="biologi" required>
             </div>
 
-            {% comment %} <div class="form-group">
+            <div class="form-group">
                 <label for="" class="control-label">Tanggal Lahir</label>
                 <input required type="text" id="date" class="form-control" name="tanggal_lahir" value="" readonly>
-            </div> {% endcomment %}
+            </div> 
 
             <div class="form-group" >
                 <label for="" class="control-label">Nilai Akademik Biologi</label>
@@ -200,6 +200,7 @@
 }
 </style>
 <script>
+$('#date').datepicker();
 function sleksijenjang() {
     var a =40 ;
     var b =55 ;

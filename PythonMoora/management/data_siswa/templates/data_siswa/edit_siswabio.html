@@ -1,0 +1,205 @@
+{% extends 'layout/dashboard/index.html' %} 
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Ubah Soal Biologi
+            <small>Template</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> Ubah Soal Biologi</a>
+            </li>
+            <li class="active">Template</li>
+        </ol>
+    </section>
+ <div class="col-md-6">
+  <form action="{% url 'data_siswa:updatebio' siswa.id %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+            <div class="form-group">
+                <label for="username">username</label>
+                <input type="text" required name="username" value="{{siswa.user}}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" required name="password" value="" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Nama</label>
+                <input type="text" class="form-control" name="nama" value="{{siswa.nama}}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Jenis Kelamin</label>
+            </div>
+            <div class="form-group">
+                 <input required type="radio" name="jenis_kelamin" value="Laki - Laki" {% if siswa.jenis_kelamin == 'Laki - Laki' %} checked {% endif %}>Laki - Laki &nbsp; &nbsp; &nbsp;
+                <input required type="radio" name="jenis_kelamin" value="Perempuan" {% if siswa.jenis_kelamin == 'Perempuan' %} checked {% endif %}> Perempuan
+            </div>
+
+            <div class="form-group">
+                    <label for="" class="control-label">Alamat</label>
+                    <textarea name="alamat" rows="3" class="form-control" required>{{siswa.alamat}}</textarea>
+            </div>
+        
+              
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+            <div class="form-group" hidden>
+                <label for="" class="control-label">Olimpiade</label>
+                <input type="text" class="form-control" name="mata_pelajaran" value="biologi" required>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Tanggal Lahir</label>
+                <input required type="text" id="date" class="form-control" name="tanggal_lahir" value="{{siswa.tanggal_lahir}}" readonly>
+            </div> 
+
+            <div class="form-group" >
+                <label for="" class="control-label">Nilai Akademik Biologi</label>
+                <input type="text" class="form-control" name="nilai" value="{{siswa.nilai_akademiks.nilai}}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Jenjang</label>
+                  <select class="form-control " name="jenjang" id="id_jenjang" onclick="sleksijenjang()" >
+                    <option selected="selected"> --- Pilih Jenjang --- </option>
+                    <option required {% if siswa.kelass.jenjang == '1 SMA' %}selected{% endif %}>1 SMA</option>
+                    <option required {% if siswa.kelass.jenjang == '2 SMA' %}selected{% endif %}>2 SMA</option>
+                    <option required {% if siswa.kelass.jenjang == '3 SMA' %}selected{% endif %}>3 SMA</option>
+                  </select>
+            </div>
+
+            <div class="form-group" hidden >
+                <label for="" class="control-label">Nilai kelas</label>
+                <input type="text" class="form-control" name="nilaikl" id="id_nilaikl" value="{{siswa.kelass.nilai}}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Pengalaman Lomba</label>
+                <select class="form-control " name="intensitas" id="id_intensitas" onclick="sleksiintensitas()" >
+                    <option selected="selected">--- Pilih Intensitas Pengalaman ---</option>
+                    <option required {% if siswa.plombas.intensitas == 'Sering Mengikuti Olimpiade' %}selected{% endif %}> Sering Mengikuti Olimpiade</option>
+                    <option required {% if siswa.plombas.intensitas == 'Cukup Sering Mengikuti Olimpiade' %}selected{% endif %}>Cukup Sering Mengikuti Olimpiade</option>
+                    <option required {% if siswa.plombas.intensitas == 'Jarang Mengikuti Olimpiade' %}selected{% endif %}>Jarang Mengikuti Olimpiade</option>
+                    <option required {% if siswa.plombas.intensitas == 'Tidak Pernah Mengikuti Olimpiade' %}selected{% endif %}>Tidak Pernah Mengikuti Olimpiade</option>
+                </select>
+            </div>
+
+            <div class="form-group" hidden>
+                <label for="" class="control-label">Nilai Pengalaman Lomba</label>
+                <input type="text" class="form-control" name="nilaipl" id="id_nilaipl" value="{{siswa.plombas.nilai}}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="control-label">Karakter</label>
+                 <select class="form-control " name="sikap" id="id_sikap" onclick="sleksisikap()" >
+                      <option selected="selected">--- Sikap Siswa ---</option>
+                      <option required {% if siswa.karakters.sikap == 'Baik' %}selected{% endif %}>Baik</option>
+                      <option required {% if siswa.karakters.sikap == 'Cukup Baik' %}selected{% endif %}>Cukup Baik</option>
+                      <option required {% if siswa.karakters.sikap == 'Buruk' %}selected{% endif %}>Buruk</option>
+                </select>
+            </div>
+
+            <div class="form-group" hidden>
+                <label for="" class="control-label">Nilai Karakter</label>
+                <input type="text" class="form-control" id="id_nilaikr" name="nilaikr" value="{{siswa.karakters.nilai}}" required>
+            </div>
+
+
+            <div class="form-group ">
+            <label for="" class="control-label">
+                Aktifkan Langsung User ?
+            </label> &nbsp; <input type="checkbox" name="staff">
+            </div>
+            <br>
+            
+          
+      </div>
+      <!-- /.modal-content -->
+      
+    </div>
+    <!-- /.modal-dialog -->
+    <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+  </div>
+</div>
+
+<script>
+    $('#date').datepicker();
+function sleksijenjang() {
+    var a =40 ;
+    var b =55 ;
+    var c =70 ;
+    var d =0;
+    var jjg = document.getElementById('id_jenjang').value;
+    if (jjg === "1 SMA") {
+      document.getElementById("id_nilaikl").value = b;
+
+    }else if (jjg === "2 SMA"){
+      document.getElementById("id_nilaikl").value = a;
+
+    }else if (jjg === "3 SMA"){
+      document.getElementById("id_nilaikl").value = c;
+
+    }else {
+      document.getElementById("id_nilaikl").value = d;
+
+    }
+  }
+
+function sleksiintensitas() {
+    var a =70 ;
+    var b =55 ;
+    var c =40 ;
+    var d =25 ;
+    var jjg = document.getElementById('id_intensitas').value;
+    if (jjg === "Sering Mengikuti Olimpiade") {
+      document.getElementById("id_nilaipl").value = a;
+
+  }else if (jjg === "Cukup Sering Mengikuti Olimpiade"){
+      document.getElementById("id_nilaipl").value = b;
+
+  }else if (jjg === "Jarang Mengikuti Olimpiade"){
+      document.getElementById("id_nilaipl").value = c;
+
+  }else if (jjg === "Tidak Pernah Mengikuti Olimpiade") {
+      document.getElementById("id_nilaipl").value = d;
+
+  }else{
+    document.getElementById("id_nilaipl").value = 0 ;
+  }
+}
+
+function sleksisikap() {
+      var a =40 ;
+      var b =55 ;
+      var c =70 ;
+      var d =0;
+      var jjg = document.getElementById('id_sikap').value;
+      if (jjg === "Baik") {
+        document.getElementById("id_nilaikr").value = c;
+
+      }else if (jjg === "Cukup Baik"){
+        document.getElementById("id_nilaikr").value = b;
+
+      }else if (jjg === "Buruk"){
+        document.getElementById("id_nilaikr").value = a;
+
+      }else {
+        document.getElementById("id_nilaikr").value = d;
+
+      }
+    }
+
+   
+</script> {% endblock%}

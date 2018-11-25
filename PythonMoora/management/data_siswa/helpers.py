@@ -9,7 +9,7 @@ sw = Siswa.objects.all()
 def ListDataSiswa(sw):
     if len(sw)>0:
         cols = ['id','username','siswa','alamat','mata_pelajaran','nilai_akademik','jenjang',
-               'sikap','intensitas']
+               'sikap','intensitas','id_user','tanggal_lahir']
         dt ={
             cols[0] : [int(a.id) for a in sw],
             cols[1] : [str(a.user) for a in sw],
@@ -20,6 +20,8 @@ def ListDataSiswa(sw):
             cols[6] : [str(a.kelass.jenjang) for a in sw],
             cols[7] : [str(a.karakters.sikap) for a in sw],
             cols[8] : [str(a.plombas.intensitas) for a in sw],
+            cols[9] : [str(a.user_id) for a in sw],
+            cols[10] : [str(a.tanggal_lahir) for a in sw],
         }
         dfdata_siswa = pd.DataFrame(data=dt)
         return dfdata_siswa
@@ -115,6 +117,27 @@ def Data_SiswaBio(sw):
                 tmp.append(tmpA[i][1])
         df=pd.DataFrame(data=tmp,columns=['intensitas'])
         return df
+
+    def SlkIdUserBio(sw):
+        c= ListDataSiswa(sw)
+        tmpA=list(zip(c.mata_pelajaran,c.id_user))
+        tmp=[]
+        for i in range(len(c)):
+            if tmpA[i][0] == "biologi":
+                tmp.append(tmpA[i][1])
+        df=pd.DataFrame(data=tmp,columns=['id_user'])
+        return df
+
+    
+    def SlkTanggal(sw):
+        c= ListDataSiswa(sw)
+        tmpA=list(zip(c.mata_pelajaran,c.tanggal_lahir))
+        tmp=[]
+        for i in range(len(c)):
+            if tmpA[i][0] == "biologi":
+                tmp.append(tmpA[i][1])
+        df=pd.DataFrame(data=tmp,columns=['tanggal_lahir'])
+        return df
     new=pd.concat([SlkIdBio(sw),SlkUsernameBio(sw),SlkSiswaBio(sw),SlkAlamatBio(sw),SlkMataPelajaranBio(sw),
-    SlkNilaiAkademikBio(sw),SlkJenjangBio(sw),SlkSikapBio(sw),SlkIntensitasBio(sw)],axis=1)
+    SlkNilaiAkademikBio(sw),SlkJenjangBio(sw),SlkSikapBio(sw),SlkIntensitasBio(sw),SlkIdUserBio(sw),SlkTanggal(sw)],axis=1)
     return new

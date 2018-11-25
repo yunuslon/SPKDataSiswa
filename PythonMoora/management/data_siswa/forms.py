@@ -13,6 +13,8 @@ class UserForm(forms.Form):
 class SiswaForm(forms.Form):
     nama = forms.CharField(max_length=30)
     jenis_kelamin = forms.CharField(max_length=30)
+    tanggal_lahir= forms.DateField(
+        widget=forms.widgets.DateInput(format="%m/%d/%Y"))
     alamat = forms.CharField(max_length=70)
 
     class Meta:
