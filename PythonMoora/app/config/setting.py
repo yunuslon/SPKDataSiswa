@@ -29,6 +29,7 @@ PROJECT_APPS = [
     'soal.soalmatematika',
     'soal.daftar_olimpiade',
     'library',
+    'data_user',
     'soal.tesolimpiade',
 
 

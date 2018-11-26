@@ -4,42 +4,39 @@
   <div class="box-body">
     <div class="box-header">
       <!-- <h3 class="box-title">Siswa</h3> -->
-      {% comment %} <a type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default"> 
+      <a type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default"> 
        Tambah <i class="fa fa-plus"></i> 
-     </a> {% endcomment %}
+     </a>
    </div>
    <table id="example1" class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>No</th>
         <!-- <th>ID</th> -->
-        <th>Nama</th>
-        <th>Jenis Kelamin</th>
-        <th>Alamat</th>
-        <th>User</th>
-        <th>Aksi</th>
+        <th>Username</th>
+        <th>Password</th>
+        
       </tr>
     </thead>
     <tbody>
-      {% for sw in siswa %}
+      {% for us in user %}
       <tr>
         <td>{{forloop.counter}}</td>
         <!-- <td>{{sw.id}}</td> -->
-        <td>{{sw.nama}}</td>
-        <td>{{sw.jenis_kelamin}}</td>
-        <td>{{sw.alamat}}</td>
-        <td>{{sw.user}}</td>
+        <td>{{us.username}}</td>
+        <td>{{us.password}}</td>
+
 
         <td>
-         <a href="{% url 'siswa:edit' sw.id %}" class="btn btn-warning">
+         <a href="#" class="btn btn-warning">
           <i class="fa fa-edit"></i>
         </a>
-        <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{sw.id}}">
+        <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{us.id}}">
           <i class="fa fa-trash"></i>
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal{{sw.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="myModal{{us.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -47,11 +44,11 @@
                 <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
               </div>
               <div class="modal-body">
-                Apakah anda yakin ingin menghapus Siswa dengan nama <b>{{sw.nama}}</b> dan id <b>{{sw.id}}</b>?
+                Apakah anda yakin ingin menghapus Siswa dengan nama <b>{{us.username}}</b> dan id <b>{{us.id}}</b>?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                <a href="{% url 'siswa:hapus' id=sw.id %}" class="btn btn-danger">
+                <a href="#" class="btn btn-danger">
                   <i class="fa fa-trash"></i> Hapus
                 </a>
               </div>
@@ -85,61 +82,52 @@
             </div>
             <div class="box-body">
               <!-- Date dd/mm/yyyy -->
-              <form method="POST" action="{% url 'siswa:simpan'%}">
+              <form method="POST" action="{% url 'data_user:simpan'%}">
                 {% csrf_token %}
 
                 <div class="form-group">
-                  <label>User</label>
+                  <label>Username</label>
                   <div class="input-group">
                    <div class="input-group-addon">
                     <i class="fa fa-user"></i>
                   </div>
-                  {{form.user | add_class:"form-control" |append_attr:"placeholder:Input User"}}
+                  <input type="text" name="username" class="form-control pull-right" value="">
                 </div>
               </div>
               <br>
 
               <div class="form-group">
-                <label>Nama Siswa</label>
+                <label>Password</label>
                 <div class="input-group">
                  <div class="input-group-addon">
-                  <i class="fa fa-user"></i>
+                  <i class="fa  fa-lock"></i>
                 </div>
-                <input type="text" name="nama" class="form-control pull-right" value="">
+                <input type="password" id="pass1"  class="form-control pull-right" value="">
               </div>
             </div>
             <br>
-
+            
             <div class="form-group">
-              <label>Jenis kelamin</label>
-
+              <label>Password Confirmation </label>
               <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa  fa-venus-mars"></i>
-                </div>
-
-                <select class="form-control " name="jenis_kelamin"  >
-                  <option value="Laki - Laki">Laki - Laki</option>
-                  <option value="Perempuan">Perempuan</option>
-                </select>
+               <div class="input-group-addon">
+                <i class="fa  fa-lock"></i>
               </div>
-              <!-- /.input group -->
+              <input type="password" id="pass2" class="form-control pull-right" value="" onchange="validasipass()">
             </div>
-            <br>
-
-            <div class="form-group">
-              <label>Alamat</label>
-              <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa  fa-road"></i>
-                </div>
-                <textarea name="alamat" rows="3" class="form-control"></textarea>
-              </div>
-            </div>
-            <br>
           </div>
-          <!-- /.box-body -->
+          <br>
+          
+          <div class="form-group">
+            <label>Password </label>
+            <div class="input-group">
+             <div class="input-group-addon">
+              <i class="fa  fa-lock"></i>
+            </div>
+            <input type="text" id="pass3" name="password" class="form-control pull-right" value="" required="">
+          </div>
         </div>
+        <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
@@ -152,3 +140,19 @@
 <!-- /.modal-dialog -->
 
 </div>
+<script>
+  function validasipass() {
+    // body...
+    var pass1 = document.getElementById('pass1').value;
+    var pass2 = document getElementById('pass2').value;
+    // var pass3 = document getElementById('pass3').value;
+    if (pass1 === pass2) {
+      document.getElementById('pass3').value=pass1;
+    }else{
+      alert("password tidak sama")
+      document.getElementById('pass3').value="";
+
+    }
+  }
+
+</script>

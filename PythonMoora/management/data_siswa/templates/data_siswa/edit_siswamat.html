@@ -17,7 +17,7 @@
     </section>
 <br>
  <div class="col-md-6">
-  <form action="{% url 'data_siswa:updatebio' siswa.id %}" method="POST" enctype="multipart/form-data">
+  <form action="{% url 'data_siswa:updatemat' siswa.id %}" method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
             <div class="form-group">
                 <label for="username">username</label>
@@ -53,7 +53,7 @@
             <div class="col-md-6">
             <div class="form-group" >
                 <label for="" class="control-label">Olimpiade</label>
-                <input type="text" class="form-control" name="mata_pelajaran" value="biologi" required>
+                <input type="text" class="form-control" name="mata_pelajaran" value="matematika" required>
             </div>
 
             <div class="form-group">
@@ -62,7 +62,7 @@
             </div> 
 
             <div class="form-group" >
-                <label for="" class="control-label">Nilai Akademik Biologi</label>
+                <label for="" class="control-label">Nilai Akademik Matematika</label>
                 <input type="text" class="form-control" name="nilai" value="{{siswa.nilai_akademiks.nilai}}" required>
             </div>
 

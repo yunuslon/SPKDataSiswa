@@ -11,11 +11,11 @@ class UserForm(forms.Form):
         model = User
 
 class SiswaForm(forms.Form):
-    nama = forms.CharField(max_length=30)
+    nama = forms.CharField(max_length=100)
     jenis_kelamin = forms.CharField(max_length=30)
     tanggal_lahir= forms.DateField(
         widget=forms.widgets.DateInput(format="%m/%d/%Y"))
-    alamat = forms.CharField(max_length=70)
+    alamat = forms.CharField(max_length=200)
 
     class Meta:
         model = Siswa
@@ -28,21 +28,21 @@ class NilaiAkademikForm(forms.Form):
         model = NilaiAkademik
 
 class KelasForm(forms.Form):
-    jenjang = forms.CharField(max_length=30)
+    jenjang = forms.CharField(max_length=120)
     nilaikl = forms.IntegerField(initial=0)
     
     class Meta:
         model = Kelas
 
 class PlombaForm(forms.Form):
-    intensitas = forms.CharField(max_length=30)
+    intensitas = forms.CharField(max_length=120)
     nilaipl = forms.IntegerField(initial=0)
     
     class Meta:
         model = Plomba
 
 class KarakterForm(forms.Form):
-    sikap = forms.CharField(max_length=30)
+    sikap = forms.CharField(max_length=100)
     nilaikr = forms.IntegerField(initial=0)
     
     class Meta:
