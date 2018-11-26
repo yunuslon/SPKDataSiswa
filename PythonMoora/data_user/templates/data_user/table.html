@@ -11,10 +11,12 @@
    <table id="example1" class="table table-bordered table-striped">
     <thead>
       <tr>
-        <th>No</th>
+        <th width="50">No</th>
         <!-- <th>ID</th> -->
         <th>Username</th>
-        <th>Password</th>
+        <th>Nama</th>
+
+        <th width="100">Aksi</th>
         
       </tr>
     </thead>
@@ -22,13 +24,12 @@
       {% for us in user %}
       <tr>
         <td>{{forloop.counter}}</td>
-        <!-- <td>{{sw.id}}</td> -->
         <td>{{us.username}}</td>
-        <td>{{us.password}}</td>
+        <td>{{us.last_name}}</td>
 
 
         <td>
-         <a href="#" class="btn btn-warning">
+         <a href="{% url 'data_user:edit' us.id%}" class="btn btn-warning">
           <i class="fa fa-edit"></i>
         </a>
         <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{us.id}}">
@@ -48,7 +49,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                <a href="#" class="btn btn-danger">
+                <a href="{% url 'data_user:hapus' id=us.id%}" class="btn btn-danger">
                   <i class="fa fa-trash"></i> Hapus
                 </a>
               </div>
@@ -82,7 +83,7 @@
             </div>
             <div class="box-body">
               <!-- Date dd/mm/yyyy -->
-              <form method="POST" action="{% url 'data_user:simpan'%}">
+              <form method="POST" action="{% url 'data_user:simpan'%}" >
                 {% csrf_token %}
 
                 <div class="form-group">
@@ -91,7 +92,18 @@
                    <div class="input-group-addon">
                     <i class="fa fa-user"></i>
                   </div>
-                  <input type="text" name="username" class="form-control pull-right" value="">
+                  <input type="email" name="username" class="form-control pull-right" value="" required>
+                </div>
+              </div>
+              <br>
+
+                <div class="form-group">
+              <label>Nama</label>
+                  <div class="input-group">
+                   <div class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <input type="text" name="last_name" class="form-control pull-right" value="" required>
                 </div>
               </div>
               <br>
@@ -102,7 +114,7 @@
                  <div class="input-group-addon">
                   <i class="fa  fa-lock"></i>
                 </div>
-                <input type="password" id="pass1"  class="form-control pull-right" value="">
+                <input type="password" id="pass1" name="password" class="form-control pull-right" value="" required>
               </div>
             </div>
             <br>
@@ -113,25 +125,20 @@
                <div class="input-group-addon">
                 <i class="fa  fa-lock"></i>
               </div>
-              <input type="password" id="pass2" class="form-control pull-right" value="" onchange="validasipass()">
+              <input type="password" id="pass2" class="form-control pull-right" value="" onkeyup="validasipass()" required>
             </div>
           </div>
           <br>
-          
-          <div class="form-group">
-            <label>Password </label>
-            <div class="input-group">
-             <div class="input-group-addon">
-              <i class="fa  fa-lock"></i>
+             <div class="form-group ">
+            <label for="" class="control-label">
+                Aktifkan Langsung User ?
+            </label> &nbsp; <input type="checkbox" name="superuser">
             </div>
-            <input type="text" id="pass3" name="password" class="form-control pull-right" value="" required="">
-          </div>
-        </div>
-        <br>
+            <br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button class="btn btn-primary">Save</button>
+        <div id="simpan" hidden="true"><button class="btn btn-primary">Save</button></div>
       </form>
     </div>
   </div>
@@ -143,15 +150,11 @@
 <script>
   function validasipass() {
     // body...
-    var pass1 = document.getElementById('pass1').value;
-    var pass2 = document getElementById('pass2').value;
     // var pass3 = document getElementById('pass3').value;
-    if (pass1 === pass2) {
-      document.getElementById('pass3').value=pass1;
+    if(document.getElementById('pass2').value !== document.getElementById('pass1').value){
+      document.getElementById('simpan').hidden = true;      
     }else{
-      alert("password tidak sama")
-      document.getElementById('pass3').value="";
-
+      document.getElementById('simpan').hidden = false;
     }
   }
 
