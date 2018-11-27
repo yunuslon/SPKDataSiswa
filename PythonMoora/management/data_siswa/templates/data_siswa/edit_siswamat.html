@@ -16,17 +16,18 @@
         </ol>
     </section>
 <br>
+<section class="content-header">
  <div class="col-md-6">
   <form action="{% url 'data_siswa:updatemat' siswa.id %}" method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
             <div class="form-group">
                 <label for="username">username</label>
-                <input type="text" required name="username" value="{{siswa.user}}" class="form-control">
+                <input type="text" required name="username" value="{{siswa.user}}" class="form-control" readonly>
             </div>
-            <div class="form-group">
+            {% comment %} <div class="form-group">
                 <label for="password">Password</label>
                 <input type="text" required name="password" value="" class="form-control">
-            </div>
+            </div> {% endcomment %}
 
             <div class="form-group">
                 <label for="" class="control-label">Nama</label>
@@ -51,7 +52,7 @@
             </div>
             <!-- /.col -->
             <div class="col-md-6">
-            <div class="form-group" >
+            <div class="form-group" hidden>
                 <label for="" class="control-label">Olimpiade</label>
                 <input type="text" class="form-control" name="mata_pelajaran" value="matematika" required>
             </div>
@@ -128,6 +129,7 @@
             <button type="submit" class="btn btn-primary">Save</button> {% endcomment %}
         </div>
   </div>
+  </section>
 </div>
 
 <script>

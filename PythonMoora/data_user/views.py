@@ -32,6 +32,7 @@ class SaveDataUserView(ManagementAccessView):
             superuser = request.POST.get('superuser', None)
             if not superuser == None:
                 user.is_superuser = True
+                user.is_staff = True
                 user.save()
 
                 group = Group.objects.get(name='Administrator')

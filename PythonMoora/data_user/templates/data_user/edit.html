@@ -82,4 +82,12 @@
 
 </script>
 
+{% if messages %}
+  {% for message in messages %}
+  <script>
+    toastr.success('{{message}}')
+  </script>
+  {% endfor %}
+  {% endif %}
+
 {% endblock %}

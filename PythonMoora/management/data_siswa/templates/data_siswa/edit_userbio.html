@@ -1,0 +1,78 @@
+{% extends 'layout/dashboard/index.html' %} 
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Edit Data Password Peserta
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <i class="fa fa-dashboard"></i>Edit Data Password Peserta </a>
+            </li>
+            <li class="active">{{siswa.nama}}</li>
+        </ol>
+    </section>
+<br>
+    <section class="content-header">
+
+ <div class="col-md-8">
+  <form action="{% url 'data_siswa:updateuserbio' siswa.id %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+            <div class="form-group">
+                <label for="username">username</label>
+                <input type="text" required name="user" value="{{siswa.user}}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" required id="pass1" name="password" value="" class="form-control">
+            </div>
+
+             <div class="form-group">
+                <label for="password">Password Confirmation</label>
+                <input type="password" required id="pass2"  value="" class="form-control" onkeyup="validasipass()">
+            </div>
+
+           <div class="form-group" hidden="true" id="simpan">
+                <button type="submit" class="btn btn-success pull-right" style="margin-left: 8px;"><i class="fa fa-save"></i> Simpan</button>
+                
+            </div>  
+            <div class="form-group" >
+                <a class="btn btn-warning pull-right" href="{% url 'data_siswa:detailbio' siswa.id%}" style="margin-left: 8px;"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
+                
+            </div>  
+          </form>
+      </div>
+      <!-- /.modal-content -->
+      
+    </div>
+    <!-- /.modal-dialog -->
+    <div class="modal-footer">
+            {% comment %} <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button> {% endcomment %}
+        </div>
+  </div>
+</div>
+    </section>
+
+<script>
+  function validasipass() {
+    // body...
+    // var pass3 = document getElementById('pass3').value;
+    if(document.getElementById('pass2').value !== document.getElementById('pass1').value){
+      document.getElementById('simpan').hidden = true;      
+    }else{
+      document.getElementById('simpan').hidden = false;
+    }
+  }
+</script>
+{% if messages %}
+  {% for message in messages %}
+  <script>
+    toastr.success('{{message}}')
+  </script>
+  {% endfor %}
+  {% endif %}
+{% endblock%}

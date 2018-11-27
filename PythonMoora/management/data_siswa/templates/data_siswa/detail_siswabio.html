@@ -3,10 +3,10 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-           Detail Data Peserta
+           Detail Data Peserta {{siswa.nama}}
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Detail Data Peserta</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Detail Data Peserta </a></li>
         </ol>
     </section>
 
@@ -16,6 +16,7 @@
                 <div class="box box-success">
                     <div class="box-body">
                         <div class="col-md-12 col-sm-0">
+                        <h4 class="fa-pull-right">Olimpiade Biologi</h4>
                             <table class="table table-responsive table-striped table-hover">
                                 <tbody>
                                         <tr>
@@ -26,7 +27,7 @@
                                             <tr>
                                                 <td style="width: 30%">Password</td>
                                                 <td>:</td>
-                                                <td>{{siswa.user.password}}</td>
+                                                <td>{{siswa.user.password}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'data_siswa:edituserbio' siswa.id %}">Ganti Password</a></td>
                                             </tr>
                                             <tr>
                                                 <td style="width: 30%">Nama</td>
@@ -85,4 +86,12 @@
         </div>
 </div>
 </section>
+
+{% if messages %}
+  {% for message in messages %}
+  <script>
+    toastr.success('{{message}}')
+  </script>
+  {% endfor %}
+  {% endif %}
 {% endblock %}

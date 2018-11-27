@@ -36,11 +36,10 @@
           <div class="box-body">
             <!-- </div> -->
             <!-- /.col -->
-            <div class="col-md-1"></div>
-            <div class="col-md-12" align="justify">
+            <div class="col-md-8" align="justify">
 
               {% for tp in tesolimpiade2  %}
-              {% if tp.1 ==  "../media/gambar/icon.png"  %}
+              {% if tp.1 ==  "gambar/icon.png"  %}
               <p style="font-size: 12pt; font-weight: bold;">{{tp.0}}. {{tp.2}}</p>
               <p>A. {{tp.3}}</p>
               <p>B. {{tp.4}}</p>
@@ -82,6 +81,8 @@
               <hr/>
 
             </div>
+            <div class="col-md-1"></div>
+
             <div class="col-md-1"></div>
 
           </div>

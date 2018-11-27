@@ -3,7 +3,7 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-           Detail Data Peserta
+           Detail Data Peserta {{siswa.nama}}
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Detail Data Peserta</a></li>
@@ -26,7 +26,7 @@
                                             <tr>
                                                 <td style="width: 30%">Password</td>
                                                 <td>:</td>
-                                                <td>{{siswa.user.password}}</td>
+                                                <td>{{siswa.user.password}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'data_siswa:edituserfis' siswa.id %}">Ganti Password</a></td>
                                             </tr>
                                             <tr>
                                                 <td style="width: 30%">Nama</td>

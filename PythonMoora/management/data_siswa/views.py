@@ -128,15 +128,15 @@ class UpdateBioView(ManagementAccessView):
         kelas_form = KelasForm(request.POST or None)
         plomba_form = PlombaForm(request.POST or None)
         karakter_form = KarakterForm(request.POST or None)
-        user_form = UserForm(request.POST, request.FILES)
+        # user_form = UserForm(request.POST, request.FILES)
 
         if siswa_form.is_valid() and nilaiakademik_form.is_valid() and kelas_form.is_valid() and plomba_form.is_valid() and karakter_form.is_valid():
-            if user_form.is_valid():
-                user = siswa.user
-                user.username = user_form.cleaned_data['user']
-                user.set_password(user_form.cleaned_data['password']) 
-                user.save()
-                siswa.user = user
+            # if user_form.is_valid():
+            #     user = siswa.user
+            #     user.username = user_form.cleaned_data['user']
+            #     user.set_password(user_form.cleaned_data['password']) 
+            #     user.save()
+            #     siswa.user = user
             
         
             # siswa.user = user
@@ -177,6 +177,33 @@ class UpdateBioView(ManagementAccessView):
             return redirect('data_siswa:view')
         else:
             return HttpResponse(siswa_form.errors)
+
+class UpdateUserBioView(ManagementAccessView):
+    def post(self, request, id):
+        siswa = Siswa.objects.get(id=id)
+        user_form = UserForm(request.POST, request.FILES)
+
+        if user_form.is_valid():
+            user = siswa.user
+            user.username = user_form.cleaned_data['user']
+            user.set_password(user_form.cleaned_data['password']) 
+            user.save()
+            siswa.user = user
+           
+            messages.add_message(request, messages.INFO, 'Password Berhasil Diupdate')  
+
+            return redirect('data_siswa:detailbio',siswa.id)
+        else:
+            return HttpResponse(user_form.errors)
+
+class UbahUserBioView(ManagementAccessView):
+    def get(self, request, id):
+        template = 'data_siswa/edit_userbio.html'
+        data = {
+            'siswa': Siswa.objects.get(id=id),
+        }
+        return render(request, template, data)
+
 
 # ############################################################################################################################
 # ############################################################################################################################
@@ -299,15 +326,15 @@ class UpdateFisView(ManagementAccessView):
         kelas_form = KelasForm(request.POST or None)
         plomba_form = PlombaForm(request.POST or None)
         karakter_form = KarakterForm(request.POST or None)
-        user_form = UserForm(request.POST, request.FILES)
+        # user_form = UserForm(request.POST, request.FILES)
 
         if siswa_form.is_valid() and nilaiakademik_form.is_valid() and kelas_form.is_valid() and plomba_form.is_valid() and karakter_form.is_valid():
-            if user_form.is_valid():
-                user = siswa.user
-                user.username = user_form.cleaned_data['user']
-                user.set_password(user_form.cleaned_data['password']) 
-                user.save()
-                siswa.user = user
+            # if user_form.is_valid():
+            #     user = siswa.user
+            #     user.username = user_form.cleaned_data['user']
+            #     user.set_password(user_form.cleaned_data['password']) 
+            #     user.save()
+            #     siswa.user = user
             
         
             # siswa.user = user
@@ -350,6 +377,31 @@ class UpdateFisView(ManagementAccessView):
         else:
             return HttpResponse(siswa_form.errors)
 
+class UpdateUserFisView(ManagementAccessView):
+    def post(self, request, id):
+        siswa = Siswa.objects.get(id=id)
+        user_form = UserForm(request.POST, request.FILES)
+
+        if user_form.is_valid():
+            user = siswa.user
+            user.username = user_form.cleaned_data['user']
+            user.set_password(user_form.cleaned_data['password']) 
+            user.save()
+            siswa.user = user
+           
+            messages.add_message(request, messages.INFO, 'Password Berhasil Diupdate')  
+
+            return redirect('data_siswa:detailfis',siswa.id)
+        else:
+            return HttpResponse(user_form.errors)
+
+class UbahUserFisView(ManagementAccessView):
+    def get(self, request, id):
+        template = 'data_siswa/edit_userfis.html'
+        data = {
+            'siswa': Siswa.objects.get(id=id),
+        }
+        return render(request, template, data)
 # ############################################################################################################################
 # ############################################################################################################################
 #                                         Kimia
@@ -472,15 +524,15 @@ class UpdateKimView(ManagementAccessView):
         kelas_form = KelasForm(request.POST or None)
         plomba_form = PlombaForm(request.POST or None)
         karakter_form = KarakterForm(request.POST or None)
-        user_form = UserForm(request.POST, request.FILES)
+        # user_form = UserForm(request.POST, request.FILES)
 
         if siswa_form.is_valid() and nilaiakademik_form.is_valid() and kelas_form.is_valid() and plomba_form.is_valid() and karakter_form.is_valid():
-            if user_form.is_valid():
-                user = siswa.user
-                user.username = user_form.cleaned_data['user']
-                user.set_password(user_form.cleaned_data['password']) 
-                user.save()
-                siswa.user = user
+            # if user_form.is_valid():
+            #     user = siswa.user
+            #     user.username = user_form.cleaned_data['user']
+            #     user.set_password(user_form.cleaned_data['password']) 
+            #     user.save()
+            #     siswa.user = user
             
         
             # siswa.user = user
@@ -522,6 +574,33 @@ class UpdateKimView(ManagementAccessView):
             return redirect('data_siswa:kimia')
         else:
             return HttpResponse(siswa_form.errors)
+
+
+class UpdateUserKimView(ManagementAccessView):
+    def post(self, request, id):
+        siswa = Siswa.objects.get(id=id)
+        user_form = UserForm(request.POST, request.FILES)
+
+        if user_form.is_valid():
+            user = siswa.user
+            user.username = user_form.cleaned_data['user']
+            user.set_password(user_form.cleaned_data['password']) 
+            user.save()
+            siswa.user = user
+           
+            messages.add_message(request, messages.INFO, 'Password Berhasil Diupdate')  
+
+            return redirect('data_siswa:detailkim',siswa.id)
+        else:
+            return HttpResponse(user_form.errors)
+
+class UbahUserKimView(ManagementAccessView):
+    def get(self, request, id):
+        template = 'data_siswa/edit_userkim.html'
+        data = {
+            'siswa': Siswa.objects.get(id=id),
+        }
+        return render(request, template, data)
 
 
 # ############################################################################################################################
@@ -695,3 +774,29 @@ class UpdateMatView(ManagementAccessView):
             return redirect('data_siswa:matematika')
         else:
             return HttpResponse(siswa_form.errors)
+
+class UpdateUserMatView(ManagementAccessView):
+    def post(self, request, id):
+        siswa = Siswa.objects.get(id=id)
+        user_form = UserForm(request.POST, request.FILES)
+
+        if user_form.is_valid():
+            user = siswa.user
+            user.username = user_form.cleaned_data['user']
+            user.set_password(user_form.cleaned_data['password']) 
+            user.save()
+            siswa.user = user
+           
+            messages.add_message(request, messages.INFO, 'Password Berhasil Diupdate')  
+
+            return redirect('data_siswa:detailmat',siswa.id)
+        else:
+            return HttpResponse(user_form.errors)
+
+class UbahUserMatView(ManagementAccessView):
+    def get(self, request, id):
+        template = 'data_siswa/edit_usermat.html'
+        data = {
+            'siswa': Siswa.objects.get(id=id),
+        }
+        return render(request, template, data)
