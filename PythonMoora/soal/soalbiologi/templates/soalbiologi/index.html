@@ -10,11 +10,7 @@
      <div class="callout callout-info" style="margin-bottom: 0!important;" >
       <h4><i class="fa fa-info"></i> Note:</h4>
     Baca soal dengan teliti, dan jangan lupa berdoa sebelum menjawab :)</div>
-      <!-- <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
-      </ol> -->
+  
     </section>
 
     <!-- Main content -->
@@ -64,52 +60,59 @@
               <input type="radio" name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="E"> {{tp.7}} <br>
               <br/>
               <br/> 
-
-
               {% endif %}
-
               <script >
                 function displayResult{{tp.0}}(isirb){ 
-               
+
                  document.getElementById("jwb{{tp.0}}").value=isirb; 
-               
-             }   
-           </script>
-           {% endfor %}
-           <p id="butt"><button class="btn btn-primary" onclick="ax()">Simpan</button></p>
-           <hr/>
-           <div  align="center">
-            <form  method="POST" action="{% url 'soalbiologi:simpan' %}">
-              {% csrf_token %}
-              <!-- <label style="font-size: 40pt; text-decoration: bold;" id="has"></label> -->
-              <!-- <input type="text" name="nama" value="{{request.user.siswa.nama}}"> -->
-              <input type="text" name="mata_pelajaran"  value="biologi" hidden>
-              <input type="text" name="nilai" id="hasil" value="" hidden>
-              <p id="butt2" hidden><button class="btn btn-primary">Kirim</button></p>
 
-            </form>
-          </div>
+               }   
+             </script>
+             {% endfor %}
+             <p ><button class="btn btn-primary" data-toggle="modal" data-target="#modal-default" onclick="ax()">Selesai</button></p>
 
-          <hr/>
+           </div>
+           <div class="col-md-1"></div>
+           <div class="col-md-1"></div>
 
+         </div>
+         <!-- /.box-body -->
+         <div class="box-footer">
+          <i class="fa fa-thumbs-up"></i> Semoga hasil di dapatkan memuaskan
         </div>
-            <div class="col-md-1"></div>
-        <div class="col-md-1"></div>
-
+        <!-- /.box-footer-->
       </div>
-      <!-- /.box-body -->
-      <div class="box-footer">
-        <i class="fa fa-thumbs-up"></i> Semoga hasil di dapatkan memuaskan
-      </div>
-      <!-- /.box-footer-->
-    </div>
-    <!-- /.box -->
+      <!-- /.box -->
 
-  </section>
-  <!-- /.content -->
-</div>
+    </section>
+    <!-- /.content -->
+  </div>
 </div>
 <!-- <div class="col-md-1"></div> -->
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+          <h4 align="left">Konfirmasi</h4>
+        </div>
+        <div class="modal-body">
+         <form  method="POST" action="{% url 'soalbiologi:simpan' %}">
+          {% csrf_token %}
+          <input type="text" name="mata_pelajaran"  value="biologi" hidden>
+          <input type="text" name="nilai" id="hasil" value="" hidden>
+
+          <p>Apakah Anda Telah yakin dengan Jawaban Anda?</p>
+        </div>
+        <div class="modal-footer">
+          <p id="butt2" align="right"><button class="btn btn-primary">Simpan</button></p>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
 <script>
 
 
@@ -118,8 +121,7 @@
   var jawab;
   var button = document.getElementById('butt');
   var button2 = document.getElementById('butt2');
-  button.hidden = true;
-  button2.hidden = false;
+
   var kunci;
   var benar=[];
   var salah=[];
@@ -140,21 +142,10 @@
         var hasilB = benar.length;
         hasilB = hasilB * 100 / parseInt(x.innerHTML);
         var hasilS = salah.length;
-        document.getElementById("hasil").hidden = false;
         document.getElementById("hasil").value = hasilB;
         console.log("Nilai : " + hasilB + "--" + "Jumlah salah : " + hasilS);
       }
     </script>
-    <style>
-    .jaw{
-      box-shadow: 2px 2px 2px black;
-      width: 40px;
-      border-radius: 5px;
-      text-transform: capitalize;
-      text-align: center;
-    }
-  </style>
-
 
 
   {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'layout/tesolimpiade/index.html' %} {% block content %}
 
-<h2 align="center" id="bla" hidden  >{{tesolimpiade.total}}</h2>
+<h2 align="center" id="totalsoal" hidden  >{{tesolimpiade.total}}</h2>
 <h2 align="center"  hidden>{{request.user.siswa.nama}}</h2>
 
 <div class="col-md-12" align="justify">
@@ -10,11 +10,7 @@
      <div class="callout callout-info" style="margin-bottom: 0!important;" >
       <h4><i class="fa fa-info"></i> Note:</h4>
     Baca soal dengan teliti, dan jangan lupa berdoa sebelum menjawab :)</div>
-      <!-- <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
-      </ol> -->
+  
     </section>
 
     <!-- Main content -->
@@ -36,82 +32,102 @@
           <div class="box-body">
             <!-- </div> -->
             <!-- /.col -->
-            <div class="col-md-8" align="justify">
+            <div class="col-md-10" align="justify" >
 
               {% for tp in tesolimpiade2  %}
               {% if tp.1 ==  "gambar/icon.png"  %}
               <p style="font-size: 12pt; font-weight: bold;">{{tp.0}}. {{tp.2}}</p>
-              <p>A. {{tp.3}}</p>
-              <p>B. {{tp.4}}</p>
-              <p>C. {{tp.5}}</p>
-              <p>D. {{tp.6}}</p>
-              <p>E. {{tp.7}}</p>
-              <input type="text" id="kunci{{tp.0}}" value="{{tp.8}}" hidden>
-              <label>Jawab --> &nbsp;</label><input type="text" id="jwb{{tp.0}}" class="jaw" maxlength="1">
+              <input type="text" id="kunci{{tp.0}}" value="{{tp.8}}" hidden > 
+              <input type="text" id="jwb{{tp.0}}" value="" hidden > 
+              <input type="radio"  name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="A"> {{tp.3}} <br>
+              <input type="radio"  name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="B"> {{tp.4}} <br>
+              <input type="radio"  name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="C"> {{tp.5}} <br>
+              <input type="radio"  name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="D"> {{tp.6}} <br>
+              <input type="radio"  name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="E"> {{tp.7}} <br>
+              <br/>
               <br/>
               <br/>
               {% else %}
               <p style="font-size: 12pt; font-weight: bold;">{{tp.0}}. {{tp.2}}</p>
-              <img src="../../../media/{{tp.1}}" height="200px ">
-              <p>A. {{tp.3}}</p>
-              <p>B. {{tp.4}}</p>
-              <p>C. {{tp.5}}</p>
-              <p>D. {{tp.6}}</p>
-              <p>E. {{tp.7}}</p>
-              <input type="text" id="kunci{{tp.0}}" value="{{tp.8}}" hidden>
-              <label>Jawab --> &nbsp;</label><input type="text" id="jwb{{tp.0}}" class="jaw" maxlength="1">
-              <br/>
-              <br/>
+              <img src="../../../media/{{tp.1}}" height="200px "><br><br>
 
+              <input type="text" id="kunci{{tp.0}}" value="{{tp.8}}" hidden> 
+              <input type="text" id="jwb{{tp.0}}" value="" hidden > 
+              <input type="radio" name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="A"> {{tp.3}} <br>
+              <input type="radio" name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="B"> {{tp.4}} <br>
+              <input type="radio" name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="C"> {{tp.5}} <br>
+              <input type="radio" name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="D"> {{tp.6}} <br>
+              <input type="radio" name="jawaban{{tp.0}}" onclick="displayResult{{tp.0}}(this.value)" value="E"> {{tp.7}} <br>
+              <br/>
+              <br/> 
               {% endif %}
+              <script >
+                function displayResult{{tp.0}}(isirb){ 
 
-              {% endfor %}
-              <p id="butt"><button class="btn btn-primary" onclick="ax()">Simpan</button></p>
-              <hr/>
-              <div  align="center">
-                <form  method="POST" action="{% url 'soalmatematika:simpan' %}">
-                  {% csrf_token %}
-                  <input type="text" name="mata_pelajaran"  value="matematika" hidden>
-                  <input type="text" name="nilai" id="hasil" value="" hidden>
-                  <p id="butt2" hidden><button class="btn btn-primary">Kirim</button></p>
+                 document.getElementById("jwb{{tp.0}}").value=isirb; 
 
-                </form>
-              </div>
-              
-              <hr/>
+               }   
+             </script>
+             {% endfor %}
+             <p ><button class="btn btn-primary" data-toggle="modal" data-target="#modal-default" onclick="ax()">Selesai</button></p>
 
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-1"></div>
+           </div>
+           <div class="col-md-1"></div>
+           <div class="col-md-1"></div>
 
-          </div>
-          <!-- /.box-body -->
-          <div class="box-footer">
-            <i class="fa fa-thumbs-up"></i> Semoga hasil di dapatkan memuaskan
-          </div>
-          <!-- /.box-footer-->
+         </div>
+         <!-- /.box-body -->
+         <div class="box-footer">
+          <i class="fa fa-thumbs-up"></i> Semoga hasil di dapatkan memuaskan
         </div>
-        <!-- /.box -->
+        <!-- /.box-footer-->
+      </div>
+      <!-- /.box -->
 
-      </section>
-      <!-- /.content -->
+    </section>
+    <!-- /.content -->
+  </div>
+</div>
+<!-- <div class="col-md-1"></div> -->
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+          <h4 align="left">Konfirmasi</h4>
+        </div>
+        <div class="modal-body">
+         <form  method="POST" action="{% url 'soalkimia:simpan' %}">
+          {% csrf_token %}
+          <input type="text" name="mata_pelajaran"  value="kimia" hidden>
+          <input type="text" name="nilai" id="hasil" value="" hidden>
+
+          <p>Apakah Anda Telah yakin dengan Jawaban Anda?</p>
+        </div>
+        <div class="modal-footer">
+          <p id="butt2" align="right"><button class="btn btn-primary">Simpan</button></p>
+        </div>
+      </form>
+
     </div>
   </div>
-  <!-- <div class="col-md-1"></div> -->
-  <script>
-    function ax() {
-      var x = document.getElementById('bla');
-      var jawab;
-      var button = document.getElementById('butt');
-      var button2 = document.getElementById('butt2');
-      button.hidden = true;
-      button2.hidden = false;
-      var kunci;
-      var benar=[];
-      var salah=[];
-      for (var i = 1; i <= x.innerHTML; i++) {
-        jawab = document.getElementById("jwb"+i).value;
-        kunci = document.getElementById("kunci"+i).value;
+</div>
+<script>
+
+
+ function ax() {
+  var x = document.getElementById('totalsoal');
+  var jawab;
+  var button = document.getElementById('butt');
+  var button2 = document.getElementById('butt2');
+
+  var kunci;
+  var benar=[];
+  var salah=[];
+  for (var i = 1; i <= x.innerHTML; i++) {
+    jawab = document.getElementById("jwb"+i).value;
+    kunci = document.getElementById("kunci"+i).value;
           // console.log(jawab + "" + kunci);
           if (jawab == ''){
             alert('Masih ada jawaban yang kosong!');
@@ -126,21 +142,10 @@
         var hasilB = benar.length;
         hasilB = hasilB * 100 / parseInt(x.innerHTML);
         var hasilS = salah.length;
-        document.getElementById("hasil").hidden = false;
         document.getElementById("hasil").value = hasilB;
         console.log("Nilai : " + hasilB + "--" + "Jumlah salah : " + hasilS);
       }
     </script>
-    <style>
-    .jaw{
-      box-shadow: 2px 2px 2px black;
-      width: 40px;
-      border-radius: 5px;
-      text-transform: capitalize;
-      text-align: center;
-    }
-  </style>
-
 
 
   {% endblock %}

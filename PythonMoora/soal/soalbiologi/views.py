@@ -6,6 +6,8 @@ from orm.models import SoalBiologi,TesOlimpiade,HasilTes
 from soal.soalbiologi import helpers
 from soal.soalbiologi.forms import HasilTesForm
 from library.view import SoalBioAccessView
+from django.contrib.auth import authenticate, login, logout
+
 
 
 
@@ -44,4 +46,31 @@ class SimpanHasilTesBioView(SoalBioAccessView):
 
             messages.add_message(request, messages.SUCCESS,
                                  'Simpan  nilai berhasil')
-        return redirect('/soalbiologi/')
+            return redirect('soalbiologi:hasil')
+
+class ListHasilView(SoalBioAccessView):
+    template_name = 'soalbiologi/hasil.html'
+      
+
+    def get(self, request):
+        ht = HasilTes.objects.all()
+       
+        data = {
+            'ht' : ht,
+
+                }
+
+        return render(request, self.template_name, data)
+
+class HapusDaftarPesertaBiologiView(SoalBioAccessView):
+    
+    def get(self, request, id):
+        soalbiologi = SoalBiologi.objects.filter(id=id)
+        if soalbiologi.exists():
+            soalbiologi.first().delete()
+            messages.add_message(request, messages.INFO, 'Data Berhasil Dihapus')                                       
+            logout(request)
+            return redirect('login:view')
+        else:
+            messages.add_message(request, messages.INFO, 'Data Gagal Dihapus !!')  
+

@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect, get_list_or_404
 from django.views.generic import View
 from django.http import HttpResponse
 from django.contrib import messages
-from orm.models import SoalBiologi,TesOlimpiade,HasilTes
+from orm.models import SoalFisika,TesOlimpiade,HasilTes
 from soal.soalfisika import helpers
 from soal.soalfisika.forms import HasilTesForm
 from library.view import SoalFisAccessView
+from django.contrib.auth import authenticate, login, logout
 
 
 
@@ -44,4 +45,30 @@ class SimpanHasilTesFisView(SoalFisAccessView):
 
             messages.add_message(request, messages.SUCCESS,
                                  'Simpan  nilai berhasil')
-        return redirect('/soalfisika/')
+            return redirect('soalfisika:hasil')
+
+class ListHasilView(SoalFisAccessView):
+    template_name = 'soalfisika/hasil.html'
+      
+
+    def get(self, request):
+        ht = HasilTes.objects.all()
+       
+        data = {
+            'ht' : ht,
+
+                }
+
+        return render(request, self.template_name, data)
+
+class HapusDaftarPesertaFisikaView(SoalFisAccessView):
+    
+    def get(self, request, id):
+        soalfisika = SoalFisika.objects.filter(id=id)
+        if soalfisika.exists():
+            soalfisika.first().delete()
+            messages.add_message(request, messages.INFO, 'Data Berhasil Dihapus')                                       
+            logout(request)
+            return redirect('login:view')
+        else:
+            messages.add_message(request, messages.INFO, 'Data Gagal Dihapus !!')  
