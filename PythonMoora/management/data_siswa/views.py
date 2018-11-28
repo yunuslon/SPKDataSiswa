@@ -113,8 +113,23 @@ class HapusDataSiswaBioView(ManagementAccessView):
 
 class UbahBioView(ManagementAccessView):
     def get(self, request, id):
+        tgl = Siswa.objects.filter(id=id)
+        if not tgl.exists():
+            return redirect('data_siswa:view')
+        sw = tgl.first()
+        initial = {
+
+            'id': sw.id,
+            # 'nama': siswa.nama,
+            # 'jenis_kelamin': siswa.jenis_kelamin,
+            'tanggal_lahir': sw.tanggal_lahir,
+            # 'user': siswa.user,
+        }
+
+        form = SiswaForm(initial=initial)
         template = 'data_siswa/edit_siswabio.html'
         data = {
+            'form': form,
             'siswa': Siswa.objects.get(id=id),
         }
         return render(request, template, data)
@@ -311,8 +326,23 @@ class HapusDataSiswaFisView(ManagementAccessView):
 
 class UbahFisView(ManagementAccessView):
     def get(self, request, id):
+        tgl = Siswa.objects.filter(id=id)
+        if not tgl.exists():
+            return redirect('data_siswa:view')
+        sw = tgl.first()
+        initial = {
+
+            'id': sw.id,
+            # 'nama': siswa.nama,
+            # 'jenis_kelamin': siswa.jenis_kelamin,
+            'tanggal_lahir': sw.tanggal_lahir,
+            # 'user': siswa.user,
+        }
+
+        form = SiswaForm(initial=initial)
         template = 'data_siswa/edit_siswafis.html'
         data = {
+            'form' : form,
             'siswa': Siswa.objects.get(id=id),
         }
         return render(request, template, data)
@@ -509,8 +539,23 @@ class HapusDataSiswaKimView(ManagementAccessView):
 
 class UbahKimView(ManagementAccessView):
     def get(self, request, id):
+        tgl = Siswa.objects.filter(id=id)
+        if not tgl.exists():
+            return redirect('data_siswa:view')
+        sw = tgl.first()
+        initial = {
+
+            'id': sw.id,
+            # 'nama': siswa.nama,
+            # 'jenis_kelamin': siswa.jenis_kelamin,
+            'tanggal_lahir': sw.tanggal_lahir,
+            # 'user': siswa.user,
+        }
+
+        form = SiswaForm(initial=initial)
         template = 'data_siswa/edit_siswakim.html'
         data = {
+            'form': form,
             'siswa': Siswa.objects.get(id=id),
         }
         return render(request, template, data)
@@ -710,8 +755,23 @@ class HapusDataSiswaMatView(ManagementAccessView):
 
 class UbahMatView(ManagementAccessView):
     def get(self, request, id):
+        tgl = Siswa.objects.filter(id=id)
+        if not tgl.exists():
+            return redirect('data_siswa:view')
+        sw = tgl.first()
+        initial = {
+
+            'id': sw.id,
+            # 'nama': siswa.nama,
+            # 'jenis_kelamin': siswa.jenis_kelamin,
+            'tanggal_lahir': sw.tanggal_lahir,
+            # 'user': siswa.user,
+        }
+
+        form = SiswaForm(initial=initial)
         template = 'data_siswa/edit_siswamat.html'
         data = {
+            'form' : form,
             'siswa': Siswa.objects.get(id=id),
         }
         return render(request, template, data)

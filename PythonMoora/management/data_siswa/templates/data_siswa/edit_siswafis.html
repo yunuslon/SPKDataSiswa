@@ -59,7 +59,8 @@
 
             <div class="form-group">
                 <label for="" class="control-label">Tanggal Lahir</label>
-                <input required type="text" id="date" class="form-control" name="tanggal_lahir" value="{{siswa.tanggal_lahir}}" readonly>
+                {% comment %} <input required type="text" id="date" class="form-control" name="tanggal_lahir" value="{{siswa.tanggal_lahir}}" readonly> {% endcomment %}
+                {{form.tanggal_lahir | add_class:"form-control" |append_attr:"placeholder:Input Register Number" |append_attr:"id:date" |append_attr:"readonly"}}
             </div> 
 
             <div class="form-group" >
