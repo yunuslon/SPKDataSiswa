@@ -13,12 +13,21 @@
 
         </li>
         <!-- <li class="header"></li> -->
-
-        <li><a href="{% url 'daftar_olimpiade:view' %}">  <i class="fa fa-user"></i><span>Daftar Peserta Tes</span></a></li>
-       
-
+        <li><a href="{% url 'bobot:view' %}">  <i class="fa fa-gears"></i><span> Bobot</span></a></li>
+      <li class="treeview menu-open">
+          <a href="#">
+            <i class="fa fa-book"></i>
+            <span>Data Soal Tes Olimpiade</span>
+          </a>
+          <ul class="treeview-menu">    
+          <li><a href ="{% url 'tesolimpiade:view' %}"><i class="fa  fa-dot-circle-o"></i>Biologi</a></li>
+          <li><a href="{% url 'tesolimpiade:fisika' %}"><i class="fa  fa-dot-circle-o"></i>Fisika</a></li>
+          <li><a href="{% url 'tesolimpiade:kimia' %}"><i class="fa  fa-dot-circle-o" ></i>Kimia</a></li>
+          <li><a href="{% url 'tesolimpiade:matematika' %}"><i class="fa  fa-dot-circle-o"></i>Matematika</a></li>
+          </ul>
+        </li>
         <!-- <li class="header"></li> -->
-        <li class="treeview active menu-open">
+        <li class="treeview menu-open">
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Data Peserta</span>
@@ -31,7 +40,7 @@
           </ul>
         </li>
 
-        <li class="treeview active menu-open">
+        <li class="treeview menu-open">
           <a href="#">
             <i class="fa fa-database"></i>
             <span>Data Siswa</span>
@@ -45,7 +54,8 @@
             <li><a href="{% url 'kelas:view' %}"><i class="fa  fa-dot-circle-o"></i>Kelas</a></li>
           </ul>
         </li>
-        <li><a href="{% url 'hasil_akhir:view' %}">  <i class="fa fa-mortar-board"></i><span>Mata Pelajaran</span></a></li>
+        <li><a href="{% url 'hasil_akhir:view' %}"><i class="fa fa-mortar-board"></i><span> Mata Pelajaran</span></a></li>
+        <li><a href="{% url 'daftar_olimpiade:view' %}"><i class="fa fa-user"></i><span> Daftar Peserta Tes</span></a></li>
         
       </ul>
     </section>
