@@ -1,4 +1,4 @@
-from orm.models import SoalBiologi,SoalFisika,SoalKimia,SoalMatematika
+from orm.models import SoalBiologi,SoalFisika,SoalKimia,SoalMatematika,TesOlimpiade,Guru
 
 class AuthCheck:
 
@@ -45,6 +45,16 @@ class AuthCheck:
                 user.soalmatematika
                 return True
             except SoalMatematika.DoesNotExist:
+                return False
+        else:
+            return False
+    @staticmethod
+    def isGuru(user):
+        if user.is_staff:
+            try:
+                user.guru
+                return True
+            except Guru.DoesNotExist:
                 return False
         else:
             return False

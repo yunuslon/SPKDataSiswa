@@ -62,6 +62,10 @@ class DoLoginView(View):
                 elif authcheck.AuthCheck.isSoalMat(user):
                     login(request, user)
                     return redirect('soalmatematika:view') 
+                elif authcheck.AuthCheck.isGuru(user):
+                    login(request, user)
+                    return redirect('guru:view') 
+
                 else:
                      messages.add_message(request, messages.WARNING,
                                  'Akun Belum Terdaftar Sebagai User !!')

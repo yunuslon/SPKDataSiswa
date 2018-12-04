@@ -1,0 +1,127 @@
+{% extends 'layout/tesolimpiade/index2.html' %} 
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="col-md-12" align="justify">
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <h3>
+            Ubah Soal Kimia
+            <small>Template</small>
+        </h3>
+                <div class="box box-success">
+                    <div class="box-body">
+                        <div class="col-md-3 col-sm-3">
+                            <img src="{{soal.gambar.url}}" id="picture" alt="" style="width: 100%; height: auto; border: 1px #d5d8dc solid; margin-top: 6px;">
+                            <button class="btn btn-success btn-block" style="margin-top: 8px; margin-bottom: 8px;" onclick="document.getElementById('fileInput').click();">
+                            Upload Soal Gambar
+                                <i class="fa fa-upload"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-9 col-sm-9">
+                            <form action="{% url 'tesolimpiade:updatekim' soal.id %}" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                <div class="form-group" hidden>
+                                    <label for="" class="control-label">Mata Pelajaraan</label>
+                                    <input type="text" class="form-control" name="mata_pelajaran" value="kimia">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="" class="control-label">No Soal</label>
+                                    <input type="text" class="form-control" name="no" value="{{soal.no}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="control-label">Soal</label>
+                                    <textarea name="pertayaan" rows="3" class="form-control">{{soal.pertayaan}}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="control-label">Jawaban A</label>
+                                    <input required type="text" class="form-control" name="jawabanA" value="{{soal.jawabanA}}">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="" class="control-label">Jawaban B</label>
+                                    <input required type="text" class="form-control" name="jawabanB" value="{{soal.jawabanB}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="control-label">Jawaban C</label>
+                                    <input required type="text" class="form-control" name="jawabanC" value="{{soal.jawabanC}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="control-label">Jawaban D</label>
+                                    <input required type="text" class="form-control" name="jawabanD" value="{{soal.jawabanD}}">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="" class="control-label">Jawaban E</label>
+                                    <input required type="text" class="form-control" name="jawabanE" value="{{soal.jawabanE}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="control-label">Kunci Jawaban</label>
+                                    <select class="form-control" name="kunci">
+                                        <option value="A" {% if soal.kunci == 'A' %}selected{% endif %}>A</option>
+                                        <option value="B" {% if soal.kunci == 'B' %}selected{% endif %}>B</option>
+                                        <option value="C" {% if soal.kunci == 'C' %}selected{% endif %}>C</option>
+                                        <option value="D" {% if soal.kunci == 'D' %}selected{% endif %}>D</option>
+                                        <option value="E" {% if soal.kunci == 'E' %}selected{% endif %}>E</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input id="fileInput" name='picture' type="file" style="display:none;" accept="image/*" />
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success pull-right" style="margin-left: 8px;">Simpan</button>
+                                    <a href="{% url 'tesolimpiade:kimia' %}" class="btn btn-danger pull-right">
+                                        <i class="fa fa-arrow-left"></i> Kembali</a>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    $('#born_date').datepicker();
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#picture').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#fileInput").change(function () {
+        readURL(this);
+    });
+
+    $("#passwd_change").change(function () {
+        if ($(this).is(':checked')) {
+            $("#password").attr("disabled", false);
+        } else {
+            $("#password").attr("disabled", true);
+        }
+    });
+
+</script> {% endblock%}

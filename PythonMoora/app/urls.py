@@ -45,6 +45,7 @@ urlpatterns = [
     url(r'^tesolimpiade/', include('soal.tesolimpiade.urls', namespace='tesolimpiade')),
     url(r'^data_siswa/', include('management.data_siswa.urls', namespace='data_siswa')),
     url(r'^data_user/', include('data_user.urls', namespace='data_user')),
+    url(r'^guru/', include('guru.urls', namespace='guru')),
     
 
 

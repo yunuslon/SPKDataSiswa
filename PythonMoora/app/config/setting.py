@@ -30,6 +30,7 @@ PROJECT_APPS = [
     'soal.daftar_olimpiade',
     'library',
     'data_user',
+    'guru',
     'soal.tesolimpiade',
 
 

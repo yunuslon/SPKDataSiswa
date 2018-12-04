@@ -1,14 +1,11 @@
 {% extends 'layout/dashboard/index.html' %} {% block content %}
 <div class="content-wrapper">
-    <section class="content-header">
-        <h1>
-            Data
-            <small>User</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i>User</a></li>
-        </ol>
-    </section>
+     
+      <ol class="breadcrumb">
+  <li class="active"><i class="fa fa-user"></i> User Admin</li>
+  <li><a href="{% url 'data_user:guru' %}"><i class="fa fa-user"></i> User Guru</a></li>
+</ol>
+  
     <section class="content">
         <div class="row">
         {% comment %} <div class="col-md-2"></div> {% endcomment %}

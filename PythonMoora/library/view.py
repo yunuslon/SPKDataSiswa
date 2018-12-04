@@ -27,3 +27,8 @@ class SoalMatAccessView(views.LoginRequiredMixin, views.StaffuserRequiredMixin, 
     login_url = '/'
     redirect_field_name = 'redirect_to'
     group_required = u"SoalMat"
+
+class GuruAccessView(views.LoginRequiredMixin, views.StaffuserRequiredMixin, views.GroupRequiredMixin, generic.View):
+    login_url = '/'
+    redirect_field_name = 'redirect_to'
+    group_required = u"Guru"

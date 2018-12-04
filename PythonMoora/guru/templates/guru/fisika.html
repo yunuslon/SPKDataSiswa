@@ -1,0 +1,107 @@
+{% extends 'layout/tesolimpiade/index2.html' %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="col-md-12" align="justify">
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="header text-center">
+      <h3 class="title">Data Soal Fisika</h3>
+      <p class="category">Kategori Soal Mata Pelajaran <a>Fisika</a></p>
+    </div>
+    <h1>
+   
+        <a href="{% url 'guru:addfis' %}" class="btn btn-info pull-right"><i class="fa fa-plus-square">  Tambah Data</i></a>
+        <br>
+    </h1>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="box">
+          <div class="box-body">
+            <div class="box-header">
+              <h3 class="box-title">Data Soal Fisika</h3>&nbsp;
+            </div>
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th width="50" >No soal</th>
+                  <th>Soal</th>
+
+                  <th>Kunci</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for sb in soalfis %}
+                <tr>
+                  <td align="center">{{sb.no}}</td>
+                  <td>{{sb.pertayaan}}</td>
+                  <td align="center">{{sb.kunci}}</td>
+                  <td width="130">
+                  <a href="{% url 'guru:editfis' sb.id %}" class="btn btn-warning">
+                   <i class="fa fa-edit"></i>
+                  </a>
+                   <a href="{% url 'guru:detailfis' sb.id %}" class="btn btn-info">
+                   <i class="fa fa-eye"></i>
+                  </a>
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{sb.id}}">
+                    <i class="fa fa-trash"></i>
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="myModal{{sb.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-md" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
+                        </div>
+                        <div class="modal-body">
+                          Apakah anda yakin ingin menghapus soal <b>{{sb.pertayaan}}</b> dan id <b>{{sb.id}}</b>?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                          <a href="{% url 'guru:hapusfis' id=sb.id %}" class="btn btn-danger">
+                            <i class="fa fa-trash"></i> Hapus
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal -->
+                </td>
+
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>  
+</div>
+ </div>
+           <div class="col-md-1"></div>
+           <div class="col-md-1"></div>
+
+
+
+{% if messages %} {% for message in messages %}
+<script>
+  toastr.success('{{message}}')
+</script>
+{% endfor %} {% endif %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example1').DataTable( {
+            "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50,]]
+        } );
+    } );
+</script>
+{% endblock %}

@@ -1,6 +1,17 @@
+{% extends 'layout/dashboard/index.html' %}
 {% load widget_tweaks %}
-
-<div class="box">
+ {% block content %}
+<div class="content-wrapper">
+     
+      <ol class="breadcrumb">
+  <li><a href="{% url 'data_user:view'%}"><i class="fa fa-user"></i> User Admin</a></li>
+  <li class="active"><i class="fa fa-user"></i> User Guru</li>
+</ol>
+  
+    <section class="content">
+        <div class="row">
+            <div class="col-sm-12">
+            <div class="box">
   <div class="box-body">
     <div class="box-header">
       <!-- <h3 class="box-title">Siswa</h3> -->
@@ -29,7 +40,7 @@
 
 
         <td>
-         <a href="{% url 'data_user:edit' us.id%}" class="btn btn-warning">
+         <a href="{% url 'data_user:edit_guru' us.id%}" class="btn btn-warning">
           <i class="fa fa-edit"></i>
         </a>
         <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{us.id}}">
@@ -49,7 +60,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                <a href="{% url 'data_user:hapus' id=us.id%}" class="btn btn-danger">
+                <a href="{% url 'data_user:hapus_guru' id=us.id%}" class="btn btn-danger">
                   <i class="fa fa-trash"></i> Hapus
                 </a>
               </div>
@@ -62,6 +73,11 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
+            </div>
+
+        </div>
+    </section>
 </div>
 
 <!-- #################################Tambah############################################## -->
@@ -83,7 +99,7 @@
             </div>
             <div class="box-body">
               <!-- Date dd/mm/yyyy -->
-              <form method="POST" action="{% url 'data_user:simpan'%}" >
+              <form method="POST" action="{% url 'data_user:simpan_guru'%}" >
                 {% csrf_token %}
 
                 <div class="form-group">
@@ -132,7 +148,7 @@
              <div class="form-group " hidden>
             <label for="" class="control-label">
                 Aktifkan Langsung User ?
-            </label> &nbsp; <input type="checkbox" name="superuser" checked>
+            </label> &nbsp; <input type="checkbox" name="staff" checked>
             </div>
             <br>
       </div>
@@ -146,6 +162,9 @@
 </div>
 <!-- /.modal-dialog -->
 
+</div>
+ </div>
+    </section>
 </div>
 <script>
   function validasipass() {
@@ -164,3 +183,12 @@
   </script>
   {% endfor %}
   {% endif %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example1').DataTable( {
+            "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50,]]
+        } );
+    } );
+</script>
+{% endblock %}
