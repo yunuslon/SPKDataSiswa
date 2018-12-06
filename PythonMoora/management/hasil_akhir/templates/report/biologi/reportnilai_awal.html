@@ -43,29 +43,29 @@
     <body>
         <div class='wrapper'>
             <div class='header'>
-                <p class='title'>Report Matrix Pembobotan </p>
+                <p class='title'>Data Awal Siswa Olimpiade Biologi </p>
             </div>
         <div>
             <table class="details" border="1">
                 <thead>
-                    <th width="100px">No</th>
-                    <th width="280px">Nama</th>
-                    <th>Nilai Akademik</th>
-                    <th>Karakter</th>
-                    <th>Pengalaman Lomba</th>
-                    <th>Hasil Tes</th>
-                    <th>Kelas</th>
+                    <th align="center" width="100px">No</th>
+                    <th align="center" width="280px">Nama</th>
+                    <th align="center">Nilai Akademik</th>
+                    <th align="center">Karakter</th>
+                    <th align="center">Pengalaman Lomba</th>
+                    <th align="center">Hasil Tes</th>
+                    <th align="center">Kelas</th>
                 </thead>
                 <tbody>
                 {% for c in nl %}
                     <tr>
                         <td align="center">{{forloop.counter}}</td>
-                        <td>{{c.0}}</td>
-                        <td>{{c.1}}</td>
-                        <td>{{c.2}}</td>
-                        <td>{{c.3}}</td>
-                        <td>{{c.4}}</td>
-                        <td>{{c.5}}</td>
+                        <td align="center">{{c.0}}</td>
+                        <td align="center">{{c.1}}</td>
+                        <td align="center">{{c.2}}</td>
+                        <td align="center">{{c.3}}</td>
+                        <td align="center">{{c.4}}</td>
+                        <td align="center">{{c.5}}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

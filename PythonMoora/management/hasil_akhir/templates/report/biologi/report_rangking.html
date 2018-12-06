@@ -43,18 +43,16 @@
     <body>
         <div class='wrapper'>
             <div class='header'>
-                <p class='title'>Report Matrix Ternormalisasi </p>
+                <p class='title'>Hasil Akhir Data Siswa Olimpiade Biologi</p>
             </div>
         <div>
             <table class="details" border="1">
                 <thead>
-                    <th align="center" width="100px">No</th>
-                    <th align="center" width="280px">Nama</th>
-                    <th align="center">Nilai Akademik</th>
-                    <th align="center">Karakter</th>
-                    <th align="center">Pengalaman Lomba</th>
-                    <th align="center">Hasil Tes</th>
-                    <th align="center">Kelas</th>
+                        <th>No</th>
+                        <th align="center" width="300px">Nama</th>
+                        <th align="center">Benefit</th>
+                        <th align="center">Cost</th>
+                        <th align="center">Rangking</th>
                 </thead>
                 <tbody>
                 {% for c in nl %}
@@ -64,8 +62,6 @@
                         <td align="center">{{c.1}}</td>
                         <td align="center">{{c.2}}</td>
                         <td align="center">{{c.3}}</td>
-                        <td align="center">{{c.4}}</td>
-                        <td align="center">{{c.5}}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
