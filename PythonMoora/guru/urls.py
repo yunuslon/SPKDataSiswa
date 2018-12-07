@@ -4,6 +4,9 @@ from guru import views
 
 urlpatterns = [
 
+    url (r'^user$', views.DataAkunView.as_view(), name='user'),
+    url (r'^updateuser/(?P<id>\d+)$', views.UpdateAkunView.as_view(), name='updateuser'),
+
 # Biologi
     url (r'^$', views.ListSoalOlimpiadeBioView.as_view(), name='view'),
     url (r'^addbio$', views.AddSoalBioView.as_view(), name='addbio'),

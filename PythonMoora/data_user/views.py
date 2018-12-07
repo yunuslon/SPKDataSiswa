@@ -76,6 +76,7 @@ class EditDataUserView(ManagementAccessView):
         form = UserForm(initial=initial)
         user = User.objects.all()
         data = {
+            'user2': User.objects.get(id=id),
             'id':id,
             'form': form,
             'form_mode' : 'edit',
@@ -95,7 +96,7 @@ class UpdateDataUserView(ManagementAccessView):
             user = User.objects.get(pk=id)
             user.username = form.cleaned_data['username']
             user.last_name = form.cleaned_data['last_name']
-            user.password = form.cleaned_data['password']
+            user.set_password(form.cleaned_data['password']) 
             messages.add_message(request, messages.INFO, 'Data Berhasil Diupdate')               
             user.save(force_update=True)
             return redirect('data_user:view')
@@ -208,7 +209,8 @@ class UpdateDataUserGuruView(ManagementAccessView):
             user = User.objects.get(pk=id)
             user.username = form.cleaned_data['username']
             user.last_name = form.cleaned_data['last_name']
-            user.password = form.cleaned_data['password']
+            user.set_password(form.cleaned_data['password']) 
+
             messages.add_message(request, messages.INFO, 'Data Berhasil Diupdate')               
             user.save(force_update=True)
             return redirect('data_user:guru')

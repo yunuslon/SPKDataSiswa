@@ -47,12 +47,12 @@ class DoLoginView(View):
                     request.session.set_expiry(0)
                 else:
                     settings.SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-                if authcheck.AuthCheck.isSuperUser(user):
-                    login(request, user)
-                    return redirect('data_siswa:view') 
-                elif authcheck.AuthCheck.isSoalBio(user):
+                if authcheck.AuthCheck.isSoalBio(user):
                     login(request, user)
                     return redirect('soalbiologi:view') 
+                elif authcheck.AuthCheck.isSuperUser(user):
+                    login(request, user)
+                    return redirect('data_siswa:view') 
                 elif authcheck.AuthCheck.isSoalFis(user):
                     login(request, user)
                     return redirect('soalfisika:view') 

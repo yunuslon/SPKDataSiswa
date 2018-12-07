@@ -3,13 +3,36 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.contrib import messages
 from orm.models import Karakter,NilaiAkademik,HasilTes,Siswa,Plomba,Kelas,TesOlimpiade
-from soal.tesolimpiade.forms import TesOlimpiadeForm
+from guru.forms import TesOlimpiadeForm,UserForm
 from reportlab.pdfgen import canvas
 from django.template.loader import get_template
 from library.view import  GuruAccessView
+from django.contrib.auth.models import User, Group
+
 
 # Create your views here.
+class UpdateAkunView(GuruAccessView):
+    def post(self, request, id):
+        user_form = UserForm(request.POST, request.FILES)
 
+        if user_form.is_valid():
+            user = User.objects.get(id=id)
+            user.username = user_form.cleaned_data['username']
+            user.last_name = user_form.cleaned_data['last_name']
+            user.set_password(user_form.cleaned_data['password']) 
+            user.save()
+           
+            messages.add_message(request, messages.INFO, 'Data Akun Berhasil Diupdate')  
+
+            return redirect('guru:user')
+        else:
+            return HttpResponse(user_form.errors)
+
+class DataAkunView(GuruAccessView):
+    def get(self, request):
+        template = 'guru/user.html'
+       
+        return render(request, template)
 
 class ListSoalOlimpiadeBioView(GuruAccessView):
     def get(self, request):
