@@ -41,9 +41,32 @@
                                     <a href="{% url 'data_siswa:detailkim' a.siswa_id %}" class="btn btn-info">
                                             <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="{% url 'data_siswa:hapus_data_siswakim' id=a.siswa.user_id%}" class="btn btn-danger">
+                                    
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#myModal{{a.siswa.user_id}}">
                                         <i class="fa fa-trash"></i>
-                                    </a>
+                                      </button>
+
+                                        <!-- Modal -->
+          <div class="modal fade" id="myModal{{a.siswa.user_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-md" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Konfirmasi Penghapusan</h4>
+                </div>
+                <div class="modal-body">
+                  Apakah anda yakin ingin menghapus Siswa dengan nama <b>{{a.siswa.nama}}</b> dan id <b>{{a.siswa.user_id}}</b>?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                  <a href="{% url 'data_siswa:hapus_data_siswakim' id=a.siswa.user_id %}" class="btn btn-danger">
+                    <i class="fa fa-trash"></i> Hapus
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
                                 </td>
                             </tr>
                             {% endfor %} 

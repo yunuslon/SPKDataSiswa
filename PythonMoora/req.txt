@@ -8,4 +8,4 @@ django-braces
 xhtml2pdf
 ipython
 django-auth-mixins
-
+django-widget-tweaks
