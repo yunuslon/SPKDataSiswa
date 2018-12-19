@@ -39,7 +39,9 @@
 
                     <div class="form-group" >
                       <label for="exampleInputEmail1" class="control-label"> Nama</label>
-                      {{form.last_name | add_class:"form-control"}}
+                      {% comment %} {{form.last_name | add_class:"form-control"}} {% endcomment %}
+                        <input type="text" class="form-control" name="last_name" value="{{user2.last_name}}"  required>
+
                     </div>
 
                     <div class="form-group" >

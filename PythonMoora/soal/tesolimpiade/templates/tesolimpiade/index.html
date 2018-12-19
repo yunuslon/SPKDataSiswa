@@ -11,7 +11,7 @@
     </div>
     <h1>
       Data Soal Biologi
-      <small>Template</small>
+      {% comment %} <small>Template</small> {% endcomment %}
         <a href="{% url 'tesolimpiade:addbio' %}" class="btn btn-info pull-right"><i class="fa fa-plus-square">  Tambah Data</i></a>
     </h1>
     <ol class="breadcrumb">
@@ -26,7 +26,9 @@
         <div class="box">
           <div class="box-body">
             <div class="box-header">
-              <h3 class="box-title">Data Soal Biologi</h3>&nbsp;
+              {% comment %} <h3 class="box-title">Data Soal Biologi</h3>&nbsp; {% endcomment %}
+        <a class="btn btn-info fa-pull-right "><i class="glyphicon glyphicon-eye-open"></i></a>
+
             </div>
             <table id="example1" class="table table-bordered table-striped">
               <thead>
